@@ -12,9 +12,9 @@ h1 {
 }
 
 .dashboard-container {
-    display: flex; /* Umożliwia ułożenie elementów w kolumnach obok siebie */
-    flex-wrap: wrap; /* Zawija elementy, gdy nie mieszczą się w jednej linii */
-    gap: 20px; /* Przerwa między elementami */
+    display: flex;
+    flex-wrap: wrap; /* Zawija dashboardy na kolejne linie */
+    gap: 20px; /* Przerwa między kartami */
 }
 
 .dashboard {
@@ -26,9 +26,8 @@ h1 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Cień */
 }
 
-/* Ustawienia iframe */
 iframe {
     width: 100%; /* Szerokość iframe */
-    height: 200px; /* Wysokość iframe */
+    height: 300px; /* Dostosuj wysokość w zależności od wymagań */
     border: none; /* Bez obramowania */
 }
