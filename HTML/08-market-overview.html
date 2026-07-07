@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tindle — Market Overview</title>
+<link rel="stylesheet" href="assets/pbi.css">
+<style>
+  /* Theme: Royal Gold (light) · Skin: left sidebar nav */
+  :root{
+    --bg:#dfe1ef; --canvas:#f4f5fb; --surface:#ffffff; --surface-2:#ebedf7;
+    --border:#dcdfee; --grid:#e8eaf5; --ink:#1b2138; --ink-soft:#454d6b; --ink-mute:#8c93ac;
+    --accent:#3b4c9a; --accent-2:#c79a31; --good:#2e9e6b; --bad:#d24b46; --warn:#cf962f;
+    --c1:#3b4c9a; --c2:#c79a31; --c3:#5a8ac0; --c4:#5aa98c; --c5:#c2693f;
+    --c6:#8a6fc0; --c7:#9aa0bb; --c8:#2a3358;
+    --header-bg:#1b2138; --logo-ink:#ffffff; --header-sub:#aeb6d4;
+  }
+  .grid{ grid-template-columns:repeat(4,1fr); grid-template-rows:auto 1fr 1fr; }
+  .r2a{ grid-column:1/3; } .r2b{ grid-column:3/5; }
+  .r3row{ grid-column:1/5; grid-row:3/4; display:grid;
+    grid-template-columns:1.4fr 1.4fr 1fr; gap:10px; min-height:0; }
+  .legend{ font-size:9.5px; }
+</style>
+</head>
+<body>
+<div class="page"><div class="canvas sk-side">
+
+  <aside class="nav">
+    <div class="logo"><span class="mark">T</span>TINDLE</div>
+    <div>
+      <div class="n-title">Market Performance</div>
+      <div class="n-sub">Soft Drinks · monthly · Total Country</div>
+    </div>
+    <div class="navlist">
+      <span class="n">Summary</span>
+      <span class="n on">Overview</span>
+      <span class="n">Core Brands</span>
+      <span class="n">Shipments</span>
+      <span class="n">Finance</span>
+      <span class="n">Portfolio Map</span>
+    </div>
+    <div class="n-foot">Reporting month<br>Apr 2025</div>
+  </aside>
+
+  <div class="main">
+    <div class="grid">
+      <div class="card kpi"><span class="k-label">Company SOM</span>
+        <span class="k-val">24.9<span class="k-unit"> %</span></span>
+        <span class="k-delta up">▲ 0.3pp <span class="sub">vs Mar'25</span></span></div>
+      <div class="card kpi"><span class="k-label">Market Size</span>
+        <span class="k-val">36.0<span class="k-unit"> bn</span></span>
+        <span class="k-delta up">▲ 13% <span class="sub">vs PY</span></span></div>
+      <div class="card kpi"><span class="k-label">Core Brands SOM</span>
+        <span class="k-val">19.0<span class="k-unit"> %</span></span>
+        <span class="k-delta up">▲ 0.2pp <span class="sub">vs Mar'25</span></span></div>
+      <div class="card kpi"><span class="k-label">Lead Brand · Cola</span>
+        <span class="k-val">11.7<span class="k-unit"> %</span></span>
+        <span class="k-delta up">▲ 0.2pp <span class="sub">vs Mar'25</span></span></div>
+
+      <div class="card r2a">
+        <div class="ttl">Company Volume &amp; SOM Trend <span class="s">M units annualized (bars) · SOM % (line)</span></div>
+        <div class="body" id="vol"></div>
+      </div>
+      <div class="card r2b">
+        <div class="ttl">Companies SOM <span class="s">%, by manufacturer</span></div>
+        <div class="body" id="comp"></div>
+        <div class="legend" style="margin-top:4px">
+          <span class="it"><span class="sw" style="background:var(--c1)"></span>Tindle</span>
+          <span class="it"><span class="sw" style="background:var(--c2)"></span>Brava</span>
+          <span class="it"><span class="sw" style="background:var(--c3)"></span>Crest</span>
+          <span class="it"><span class="sw" style="background:var(--c4)"></span>Indra</span>
+        </div>
+      </div>
+
+      <div class="r3row">
+      <div class="card r3a">
+        <div class="ttl">SOM by Price Segment <span class="s">SOM %</span></div>
+        <div class="body" id="seg"></div>
+        <div class="legend" style="margin-top:3px">
+          <span class="it"><span class="sw" style="background:var(--c1)"></span>Premium</span>
+          <span class="it"><span class="sw" style="background:var(--c2)"></span>Regular</span>
+          <span class="it"><span class="sw" style="background:var(--c3)"></span>Value</span>
+          <span class="it"><span class="sw" style="background:var(--c4)"></span>Economy</span>
+        </div>
+      </div>
+      <div class="card r3b">
+        <div class="ttl">SOM by Pack Format <span class="s">SOM %</span></div>
+        <div class="body" id="fmt"></div>
+        <div class="legend" style="margin-top:3px">
+          <span class="it"><span class="sw" style="background:var(--c1)"></span>Can</span>
+          <span class="it"><span class="sw" style="background:var(--c2)"></span>Bottle</span>
+          <span class="it"><span class="sw" style="background:var(--c3)"></span>Multipack</span>
+          <span class="it"><span class="sw" style="background:var(--c4)"></span>Fountain</span>
+        </div>
+      </div>
+      <div class="card r3c">
+        <div class="ttl">Top Brands SOM <span class="s">%, Δ pp vs Mar'25</span></div>
+        <div class="body" id="brands"></div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<script src="assets/pbi.js"></script>
+<script>
+function render(){
+  const per=["FY'22","FY'23","Q2'24","Q3'24","Q4'24","Q1'25","Mar'25","Apr'25"];
+  PBI.combo("vol",{ labels:per,
+    bars:[8.7,7.1,8.2,6.2,6.3,6.6,7.2,7.4], barDec:1, barMax:15,
+    line:[23.1,23.3,21.7,23.3,24.6,24.0,24.6,24.9], lineDec:1, lineMin:15, lineMax:25.5 });
+
+  PBI.line("comp",{ dec:1, min:10, max:34, xticks:8, labels:per,
+    series:[
+      { values:[23.1,23.6,22.2,23.6,24.6,24.2,24.6,24.9] },
+      { values:[30.0,31.0,30.5,30.2,31.5,29.5,28.6,27.4] },
+      { values:[18.6,18.9,19.2,18.7,19.8,20.1,19.1,18.9] },
+      { values:[15.8,15.3,14.9,14.3,13.8,13.2,13.0,12.6] }
+    ]});
+
+  PBI.stacked("seg",{ labels:per, max:30, dec:1, labelEvery:2,
+    data: per.map((_,i)=>[
+      [3.7,2.8,3.5,1.5,2.4,3.0,3.4,3.6][i],
+      [10.1,11.2,11.5,11.5,12.2,11.6,11.7,11.8][i],
+      [3.7,2.7,3.7,4.5,2.2,2.0,2.7,2.4][i],
+      [6.3,6.8,7.1,7.9,7.9,7.5,7.0,7.1][i]
+    ])});
+
+  PBI.stacked("fmt",{ labels:per, max:30, dec:1, labelEvery:2,
+    data: per.map((_,i)=>[
+      [10.5,10.2,9.8,10.2,10.2,10.5,11.5,11.7][i],
+      [5.9,5.1,5.9,6.6,6.3,7.0,6.9,6.9][i],
+      [2.7,2.9,2.8,2.9,2.9,2.6,2.4,2.4][i],
+      [3.9,3.0,4.7,2.4,2.3,2.6,2.4,2.9][i]
+    ])});
+
+  PBI.barH("brands",{ suffix:"%", dec:1, max:14, colorIndex:0, labelW:62,
+    rows:[
+      {label:"Cola",value:11.7,delta:0.2},{label:"Zest",value:4.2,delta:0.1},
+      {label:"Fizz",value:3.7,delta:-0.1},{label:"Tonic",value:3.6,delta:0.1},
+      {label:"Spritz",value:1.3,delta:0.0},{label:"Dash",value:0.4,delta:0.0}
+    ]});
+}
+window.addEventListener("load",()=>setTimeout(render,40));
+</script>
+</body>
+</html>

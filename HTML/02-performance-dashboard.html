@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lumio — Category Performance</title>
+<link rel="stylesheet" href="assets/pbi.css">
+<style>
+  /* Theme: Emerald Pro (light) · Skin: accent band */
+  :root{
+    --bg:#dfe9e4; --canvas:#f3f8f5; --surface:#ffffff; --surface-2:#eaf2ed;
+    --border:#d8e6df; --grid:#e6efe9; --ink:#13241d; --ink-soft:#3f5750; --ink-mute:#82978d;
+    --accent:#0f9d6b; --accent-2:#2bbfa3; --good:#0f9d6b; --bad:#d9534a; --warn:#e0a228;
+    --c1:#0f9d6b; --c2:#2bbfa3; --c3:#1f7a86; --c4:#e0a228; --c5:#d9534a;
+    --c6:#6cc24a; --c7:#9bb0a8; --c8:#234b3f;
+    --header-bg:#15302a; --logo-ink:#ffffff; --header-sub:#a7c6ba;
+  }
+  .grid{ grid-template-columns:repeat(4,1fr); grid-template-rows:auto 1fr 1fr; }
+  .r2a{ grid-column:1/3; } .r2b{ grid-column:3/5; }
+  .r3a{ grid-column:1/2; } .r3b{ grid-column:2/3; } .r3c{ grid-column:3/5; }
+</style>
+</head>
+<body>
+<div class="page"><div class="canvas">
+
+  <div class="hdr">
+    <div class="logo"><span class="mark">L</span>LUMIO</div>
+    <div class="titles">
+      <span class="title">Audio — Category Performance</span>
+      <span class="sub">True-Wireless &amp; Headphones · Share of Market &amp; Segment · W18 2025</span>
+    </div>
+    <div class="spacer"></div>
+    <div class="asof">Latest week<br><b>W18 · 28 Apr 2025</b></div>
+  </div>
+
+  <div class="slicers">
+    <span class="lbl">Slicers</span>
+    <span class="chip on">Category: TWS</span>
+    <span class="chip">Brand: All</span>
+    <span class="chip">Region: All</span>
+    <span class="chip on">View: SOS</span>
+    <span class="chip">Period: W06–W18</span>
+  </div>
+
+  <div class="grid">
+    <div class="card kpi">
+      <span class="k-label">Category Volume</span>
+      <span class="k-val">1.84<span class="k-unit"> M units</span></span>
+      <span class="k-delta up">▲ 3.1% <span class="sub">WoW</span></span>
+    </div>
+    <div class="card kpi">
+      <span class="k-label">Company SOM</span>
+      <span class="k-val">22.4<span class="k-unit"> %</span></span>
+      <span class="k-delta up">▲ 0.4pp <span class="sub">WoW</span></span>
+    </div>
+    <div class="card kpi">
+      <span class="k-label">Share of Segment</span>
+      <span class="k-val">69.5<span class="k-unit"> %</span></span>
+      <span class="k-delta up">▲ 0.6pp <span class="sub">WoW</span></span>
+    </div>
+    <div class="card kpi">
+      <span class="k-label">Numeric Distribution</span>
+      <span class="k-val">76.0<span class="k-unit"> %</span></span>
+      <span class="k-delta flat">▲ 0.1pp <span class="sub">WoW</span></span>
+    </div>
+
+    <div class="card r2a">
+      <div class="ttl">Volume vs Company SOM <span class="s">M units (bars) · SOM % (line) · weekly</span></div>
+      <div class="body" id="combo"></div>
+    </div>
+    <div class="card r2b">
+      <div class="ttl">Price Segment Mix <span class="s">100% share of segment, weekly</span></div>
+      <div class="body" id="seg"></div>
+      <div class="legend" style="margin-top:4px">
+        <span class="it"><span class="sw" style="background:var(--c1)"></span>Premium</span>
+        <span class="it"><span class="sw" style="background:var(--c2)"></span>Mid</span>
+        <span class="it"><span class="sw" style="background:var(--c4)"></span>Value</span>
+      </div>
+    </div>
+
+    <div class="card r3a">
+      <div class="ttl">Form Factor <span class="s">vol split</span></div>
+      <div class="body" id="split"></div>
+    </div>
+    <div class="card r3b">
+      <div class="ttl">SOM by Region <span class="s">%</span></div>
+      <div class="body" id="geo"></div>
+    </div>
+    <div class="card r3c">
+      <div class="ttl">Key Brands — Share of Segment evolution <span class="s">%, W06–W18</span></div>
+      <div class="body" id="evo"></div>
+      <div class="legend" style="margin-top:4px">
+        <span class="it"><span class="sw" style="background:var(--c1)"></span>Pulse</span>
+        <span class="it"><span class="sw" style="background:var(--c2)"></span>Echo</span>
+        <span class="it"><span class="sw" style="background:var(--c3)"></span>Wave</span>
+        <span class="it"><span class="sw" style="background:var(--c4)"></span>Vibe</span>
+      </div>
+    </div>
+  </div>
+  <div class="foot">Lumio BI · synthetic data for portfolio demonstration</div>
+</div></div>
+
+<script src="assets/pbi.js"></script>
+<script>
+function render(){
+  const wk=["W06","W07","W08","W09","W10","W11","W12","W13","W14","W15","W16","W17","W18"];
+  PBI.combo("combo",{ labels:wk,
+    bars:[1.55,1.56,1.60,1.61,1.66,1.67,1.71,1.72,1.73,1.78,1.79,1.82,1.84], barDec:2,
+    line:[21.6,21.7,21.8,21.9,22.0,22.0,22.1,22.2,22.2,22.3,22.3,22.4,22.4], lineDec:1,
+    lineMin:20, lineMax:24 });
+
+  PBI.stacked("seg",{ pct:true, labels:wk, keys:["Premium","Mid","Value"],
+    data: wk.map((_,i)=>[73.9-i*0.12, 16.2-i*0.06, 9.9+i*0.05]) });
+
+  PBI.donut("split",{ center:"1.84M", centerSub:"category vol",
+    data:[{label:"In-ear",value:64},{label:"Over-ear",value:36}] });
+
+  PBI.barH("geo",{ suffix:"%", dec:1, max:30, colorIndex:0, labelW:80,
+    rows:[
+      {label:"Centre",value:26.4},{label:"North-West",value:24.2},
+      {label:"South",value:23.1},{label:"North-East",value:21.7},{label:"Islands",value:20.3}
+    ]});
+
+  const w7=["W06","W08","W10","W12","W14","W16","W18"];
+  PBI.line("evo",{ dec:0, min:0, max:60, xticks:7, labels:w7,
+    series:[
+      {values:[52,52,51,52,53,53,54]},
+      {values:[19,19,20,20,21,21,22]},
+      {values:[15,15,14,14,13,13,13]},
+      {values:[9,9,9,8,8,9,9]}
+    ]});
+}
+window.addEventListener("load",()=>setTimeout(render,40));
+</script>
+</body>
+</html>

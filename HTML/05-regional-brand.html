@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Vantto — Regional Brand Performance</title>
+<link rel="stylesheet" href="assets/pbi.css">
+<style>
+  /* Theme: Plum Mist (light) · Skin: left sidebar nav */
+  :root{
+    --bg:#e7e1ee; --canvas:#f6f3fa; --surface:#ffffff; --surface-2:#efeaf5;
+    --border:#e1dbec; --grid:#ece6f3; --ink:#241a33; --ink-soft:#54486a; --ink-mute:#988aa9;
+    --accent:#6a4ea3; --accent-2:#2f9e8f; --good:#2e9e6b; --bad:#d24b54; --warn:#dd9a33;
+    --c1:#6a4ea3; --c2:#2f9e8f; --c3:#b06ab3; --c4:#dd9a33; --c5:#d24b54;
+    --c6:#5aa9d6; --c7:#9c8fb3; --c8:#392a52;
+    --header-bg:#241a33; --logo-ink:#ffffff; --header-sub:#b9a9cc;
+  }
+  .grid{ grid-template-columns:repeat(4,1fr); grid-template-rows:auto 1fr 1fr; }
+  .r-map{ grid-column:1/3; grid-row:2/4; }
+  .r2c{ grid-column:3/4; } .r2d{ grid-column:4/5; }
+  .r3c{ grid-column:3/4; } .r3d{ grid-column:4/5; }
+</style>
+</head>
+<body>
+<div class="page"><div class="canvas sk-side">
+
+  <aside class="nav">
+    <div class="logo"><span class="mark">V</span>VANTTO</div>
+    <div>
+      <div class="n-title">Regional Brand Performance</div>
+      <div class="n-sub">Hair Care · brand Silk · by region</div>
+    </div>
+    <div class="navlist">
+      <span class="n on">Overview</span>
+      <span class="n">Brands</span>
+      <span class="n">Regions</span>
+      <span class="n">Channels</span>
+      <span class="n">Pricing</span>
+    </div>
+    <div class="n-foot">As of YTD · Apr 2025<br>Off-Take panel</div>
+  </aside>
+
+  <div class="main">
+    <div class="slicers">
+      <span class="lbl">Filters</span>
+      <span class="chip on">Brand: Silk</span>
+      <span class="chip on">Country: split view</span>
+      <span class="chip">Channel: All</span>
+      <span class="chip">Segment: All</span>
+    </div>
+
+    <div class="grid">
+      <div class="card kpi">
+        <span class="k-label">Brand SOM (national)</span>
+        <span class="k-val">23.9<span class="k-unit"> %</span></span>
+        <span class="k-delta up">▲ 1.6pp <span class="sub">vs PYTD</span></span>
+      </div>
+      <div class="card kpi">
+        <span class="k-label">Volume</span>
+        <span class="k-val">8.7<span class="k-unit"> M units</span></span>
+        <span class="k-delta up">▲ 5.2% <span class="sub">vs PYTD</span></span>
+      </div>
+      <div class="card kpi">
+        <span class="k-label">Weighted Distribution</span>
+        <span class="k-val">84.6<span class="k-unit"> %</span></span>
+        <span class="k-delta up">▲ 1.1pp <span class="sub">vs PYTD</span></span>
+      </div>
+      <div class="card kpi">
+        <span class="k-label">Price Index</span>
+        <span class="k-val">112<span class="k-unit"> idx</span></span>
+        <span class="k-delta flat">▲ 0pp <span class="sub">vs PYTD</span></span>
+      </div>
+
+      <div class="card r-map">
+        <div class="ttl">Brand SOM by Region <span class="s">% of category volume · YTD</span></div>
+        <div class="body" id="map"></div>
+        <div class="maplegend">
+          <span>Bubble size = SOM %</span>
+          <span class="bub"><span class="c" style="width:10px;height:10px"></span>lower</span>
+          <span class="bub"><span class="c" style="width:18px;height:18px"></span>higher</span>
+        </div>
+      </div>
+
+      <div class="card r2c">
+        <div class="ttl">SOM by Region <span class="s">%, ranked</span></div>
+        <div class="body" id="rank"></div>
+      </div>
+      <div class="card r2d">
+        <div class="ttl">Brand SOM trend <span class="s">%, quarterly</span></div>
+        <div class="body" id="trend"></div>
+      </div>
+
+      <div class="card r3c">
+        <div class="ttl">Price Segment Mix <span class="s">share of brand vol</span></div>
+        <div class="body" id="seg"></div>
+      </div>
+      <div class="card r3d">
+        <div class="ttl">Manufacturer SOM <span class="s">% national</span></div>
+        <div class="body" id="comp"></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<script src="assets/pbi.js"></script>
+<script>
+function render(){
+  // Real Poland contour (approx border, lon/lat projected) split into 4 regions.
+  const C=[102,64];
+  const P=[[8,25],[33,19],[60,12],[92,14],[110,12],[113,14],[175,14],[184,23],
+           [192,49],[186,64],[188,85],[196,89],[169,113],[119,122],[110,113],
+           [90,111],[54,101],[21,87],[15,74],[14,54],[4,43]];
+  // indices: 0..20 clockwise from NW coast; C = national centre
+  PBI.bubbleMap("map",{ suffix:"%", dec:1, viewBox:[-6,4,212,128],
+    regions:[
+      { name:"North", value:24.6, cx:100, cy:34,
+        poly:[C,P[20],P[0],P[1],P[2],P[3],P[4],P[5],P[6],P[7]] },
+      { name:"East",  value:21.3, cx:168, cy:66,
+        poly:[C,P[7],P[8],P[9],P[10],P[11],P[12]] },
+      { name:"South", value:23.8, cx:108, cy:101,
+        poly:[C,P[12],P[13],P[14],P[15],P[16]] },
+      { name:"West",  value:26.1, cx:42,  cy:68,
+        poly:[C,P[16],P[17],P[18],P[19],P[20]] }
+    ]});
+
+  PBI.barH("rank",{ suffix:"%", dec:1, max:30, colorIndex:0, labelW:64,
+    rows:[
+      {label:"West",value:26.1,delta:2.2},
+      {label:"North",value:24.6,delta:1.5},
+      {label:"South",value:23.8,delta:1.1},
+      {label:"East",value:21.3,delta:0.6}
+    ]});
+
+  PBI.line("trend",{ dec:1, min:18, max:28, xticks:6,
+    labels:["Q1'24","Q2'24","Q3'24","Q4'24","Q1'25","Apr'25"],
+    series:[{ values:[20.1,20.9,21.6,22.4,23.4,23.9], area:true }]});
+
+  PBI.donut("seg",{ center:"Silk", centerSub:"by price",
+    data:[{label:"Premium",value:58},{label:"Mid",value:31},{label:"Value",value:11}]});
+
+  PBI.barH("comp",{ suffix:"%", dec:1, max:40, colorIndex:2, labelW:64,
+    rows:[
+      {label:"Vantto",value:23.9},{label:"Lumé",value:31.2},
+      {label:"Cresta",value:24.6},{label:"Others",value:20.3}
+    ]});
+}
+window.addEventListener("load",()=>setTimeout(render,40));
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sável — Monthly Summary</title>
+<link rel="stylesheet" href="assets/pbi.css">
+<style>
+  /* Theme: Steel Coral (light) · Skin: minimal header */
+  :root{
+    --bg:#dde3ea; --canvas:#f4f6f9; --surface:#ffffff; --surface-2:#eaeff4;
+    --border:#dae1e9; --grid:#e8edf2; --ink:#172230; --ink-soft:#41505f; --ink-mute:#8693a1;
+    --accent:#34618f; --accent-2:#e0694f; --good:#2e9e6b; --bad:#d24b46; --warn:#dca22f;
+    --c1:#34618f; --c2:#e0694f; --c3:#4f9bb0; --c4:#dca22f; --c5:#7d6bb0;
+    --c6:#5aa98c; --c7:#94a3b1; --c8:#243748;
+    --header-bg:#172230; --logo-ink:#ffffff; --header-sub:#a9b7c5;
+  }
+  .grid{ grid-template-columns:repeat(4,1fr); grid-template-rows:auto 1fr 1fr; }
+  .r2a{ grid-column:1/3; } .r2b{ grid-column:3/5; }
+  .r3a{ grid-column:1/3; } .r3b{ grid-column:3/4; } .r3c{ grid-column:4/5; }
+</style>
+</head>
+<body>
+<div class="page"><div class="canvas">
+
+  <div class="hdr">
+    <div class="logo"><span class="mark">S</span>SÁVEL</div>
+    <div class="titles">
+      <span class="title">Market Performance — Monthly Summary</span>
+      <span class="sub">Brewing · shipment actuals + off-take · executive read-out</span>
+    </div>
+    <div class="spacer"></div>
+    <div class="asof">Reporting month<br><b>Apr 2025</b></div>
+  </div>
+
+  <div class="slicers">
+    <span class="lbl">Scope</span>
+    <span class="chip on">Total Country</span>
+    <span class="chip">Channel: All</span>
+    <span class="chip on">Compare: vs Plan</span>
+    <span class="chip">Vs PY</span>
+  </div>
+
+  <div class="grid">
+    <div class="card kpi"><span class="k-label">Company SOM</span>
+      <span class="k-val">24.9<span class="k-unit"> %</span></span>
+      <span class="k-delta up">▲ 0.3pp <span class="sub">vs Mar'25</span></span></div>
+    <div class="card kpi"><span class="k-label">Shipments vs Plan</span>
+      <span class="k-val">+368<span class="k-unit"> MMU</span></span>
+      <span class="k-delta up">▲ ahead of plan <span class="sub">YTD</span></span></div>
+    <div class="card kpi"><span class="k-label">Market Size</span>
+      <span class="k-val">36.0<span class="k-unit"> bn</span></span>
+      <span class="k-delta up">▲ 13% <span class="sub">vs PY</span></span></div>
+    <div class="card kpi"><span class="k-label">Lead Brand · Lager</span>
+      <span class="k-val">11.7<span class="k-unit"> %</span></span>
+      <span class="k-delta up">▲ 0.2pp <span class="sub">vs Mar'25</span></span></div>
+
+    <div class="card r2a">
+      <div class="ttl">Monthly Shipments <span class="s">M units · last 12 months</span></div>
+      <div class="body" id="ship"></div>
+    </div>
+    <div class="card r2b">
+      <div class="ttl">Company SOM Trend <span class="s">%, monthly</span></div>
+      <div class="body" id="som"></div>
+    </div>
+
+    <div class="card r3a">
+      <div class="ttl">Monthly Summary <span class="s">what's driving the numbers · Apr 2025</span></div>
+      <div class="body notepanel">
+        <h5>Volume &amp; plan</h5>
+        <ul>
+          <li>Shipments hit <b>648 M units</b> in April (<span class="pos">+1.7% vs Mar'25</span>) and are
+            <span class="pos">+368 M units ahead of the annual plan YTD</span> — driven by strong Lager
+            off-take in the West and earlier seasonal listings in the on-trade channel.</li>
+          <li>Production held broadly flat vs prior month (<span class="neg">(2) M units / (0.4)%</span>),
+            as the summer ramp-up only begins in May.</li>
+        </ul>
+        <h5>Share of market — what moved it</h5>
+        <ul>
+          <li>Company SOM rose to <b>24.9%</b> (<span class="pos">+0.3pp vs Mar'25</span>), led by
+            <b>Lager +0.2pp</b> on a national promo plus a <b>+1.1pp distribution gain</b> in modern trade;
+            <b>Wheat +0.1pp</b> from the new 0.0% variant launch.</li>
+          <li>Premium keeps outpacing the market (segment SOM <span class="pos">+0.4pp</span>), improving price
+            mix; Economy slipped as a competitor delisted two SKUs.</li>
+          <li>Gap to <b>Brava</b> narrowed by <span class="pos">0.6pp</span> as their core Lager lost numeric distribution.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card r3b">
+      <div class="ttl">SOM by Price Segment <span class="s">Apr 2025</span></div>
+      <div class="body" id="seg"></div>
+    </div>
+    <div class="card r3c">
+      <div class="ttl">Top Brands SOM <span class="s">%, Δ pp vs Mar'25</span></div>
+      <div class="body" id="brands"></div>
+    </div>
+  </div>
+  <div class="foot">Sável BI · synthetic data for portfolio demonstration</div>
+</div></div>
+
+<script src="assets/pbi.js"></script>
+<script>
+function render(){
+  const mo=["May","Jun","Jul","Aug","Sep","Oct","Nov","Dec","Jan","Feb","Mar","Apr"];
+  PBI.column("ship",{ labels:mo, dec:0, colorIndex:0, max:720,
+    values:[612,598,605,620,607,631,640,655,589,601,618,648]});
+
+  PBI.line("som",{ dec:1, min:23, max:26, xticks:12, labels:mo,
+    series:[{ values:[24.2,24.3,24.0,24.4,24.5,24.6,24.6,24.7,24.5,24.6,24.7,24.9], area:true }]});
+
+  PBI.donut("seg",{ center:"24.9%", centerSub:"company SOM",
+    data:[{label:"Premium",value:11.8},{label:"Mainstream",value:7.1},
+          {label:"Value",value:3.6},{label:"Economy",value:2.4}], dec:1});
+
+  PBI.barH("brands",{ suffix:"%", dec:1, max:14, colorIndex:0, labelW:62,
+    rows:[
+      {label:"Lager",value:11.7,delta:0.2},{label:"Pils",value:4.2,delta:0.1},
+      {label:"Wheat",value:3.7,delta:0.1},{label:"Dark",value:3.6,delta:0.0},
+      {label:"Amber",value:1.3,delta:0.0},{label:"Stout",value:0.4,delta:0.0}
+    ]});
+}
+window.addEventListener("load",()=>setTimeout(render,40));
+</script>
+</body>
+</html>

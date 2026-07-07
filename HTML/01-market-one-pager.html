@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Meridian — Market One-Pager</title>
+<link rel="stylesheet" href="assets/pbi.css">
+<style>
+  /* Theme: Meridian Blue (light, corporate navy / teal) */
+  :root{
+    --bg:#dfe6f2; --canvas:#f4f7fc; --surface:#ffffff; --surface-2:#eef2f9;
+    --border:#dde4ef; --grid:#eaeff7; --ink:#16243b; --ink-soft:#46566f; --ink-mute:#8b98ad;
+    --accent:#1f5fd6; --accent-2:#17a89a; --good:#1f9d6b; --bad:#dd4b39; --warn:#e2a02e;
+    --c1:#1f5fd6; --c2:#17a89a; --c3:#6b54e6; --c4:#e2a02e; --c5:#dd4b39;
+    --c6:#39b58f; --c7:#9aa6bb; --c8:#23365a;
+    --header-bg:#16243b; --logo-ink:#ffffff; --header-sub:#9fb0cc;
+  }
+  .grid{ grid-template-columns:repeat(5,1fr); grid-template-rows:auto 1.15fr 1fr; }
+  .r2a{ grid-column:1/4; } .r2b{ grid-column:4/6; }
+  .r3a{ grid-column:1/3; } .r3b{ grid-column:3/6; }
+</style>
+</head>
+<body>
+<div class="page"><div class="canvas">
+
+  <div class="hdr">
+    <div class="logo"><span class="mark">M</span>MERIDIAN</div>
+    <div class="titles">
+      <span class="title">Coffee Pods — Market One-Pager</span>
+      <span class="sub">Premium Single-Serve · Total Country · Executive Summary</span>
+    </div>
+    <div class="spacer"></div>
+    <div class="asof">Reporting period<br><b>YTD · Apr 2025 (W18)</b></div>
+  </div>
+
+  <div class="slicers">
+    <span class="lbl">Filters</span>
+    <span class="chip on">Total Market</span>
+    <span class="chip">Region: All</span>
+    <span class="chip">Channel: Grocery + Online</span>
+    <span class="chip">Segment: All</span>
+    <span class="chip">Currency: EUR</span>
+  </div>
+
+  <div class="grid">
+    <!-- KPI ROW -->
+    <div class="card kpi">
+      <span class="k-label">Volume</span>
+      <span class="k-val">48.6<span class="k-unit"> M units</span></span>
+      <span class="k-delta up">▲ 4.7% <span class="sub">vs PYTD</span></span>
+      <div class="spark" id="sp1"></div>
+    </div>
+    <div class="card kpi">
+      <span class="k-label">Value Share</span>
+      <span class="k-val">24.1<span class="k-unit"> %</span></span>
+      <span class="k-delta up">▲ 1.5pp <span class="sub">vs PYTD</span></span>
+      <div class="spark" id="sp2"></div>
+    </div>
+    <div class="card kpi">
+      <span class="k-label">Volume Share</span>
+      <span class="k-val">22.4<span class="k-unit"> %</span></span>
+      <span class="k-delta up">▲ 1.5pp <span class="sub">vs PYTD</span></span>
+      <div class="spark" id="sp3"></div>
+    </div>
+    <div class="card kpi">
+      <span class="k-label">Weighted Distribution</span>
+      <span class="k-val">87.0<span class="k-unit"> %</span></span>
+      <span class="k-delta up">▲ 0.9pp <span class="sub">vs PYTD</span></span>
+      <div class="spark" id="sp4"></div>
+    </div>
+    <div class="card kpi">
+      <span class="k-label">Avg Price / Pack</span>
+      <span class="k-val">5.84<span class="k-unit"> €</span></span>
+      <span class="k-delta down">▼ 0.3% <span class="sub">vs PYTD</span></span>
+      <div class="spark" id="sp5"></div>
+    </div>
+
+    <!-- ROW 2 -->
+    <div class="card r2a">
+      <div class="ttl">Volume &amp; Value Share — 12-month trend
+        <span class="s">M units (bars) · value share % (line)</span></div>
+      <div class="body" id="trend"></div>
+    </div>
+    <div class="card r2b">
+      <div class="ttl">Brand Mix <span class="s">share of company volume</span></div>
+      <div class="body" id="mix"></div>
+    </div>
+
+    <!-- ROW 3 -->
+    <div class="card r3a">
+      <div class="ttl">Volume Share by Region <span class="s">SOM %, Δ pp vs PYTD</span></div>
+      <div class="body" id="region"></div>
+    </div>
+    <div class="card r3b">
+      <div class="ttl">Brand Performance <span class="s">YTD vs PYTD</span></div>
+      <div class="body" style="overflow:auto">
+        <table class="mx">
+          <thead><tr>
+            <th>Brand</th><th class="num">Vol (M)</th><th class="num">Val Share (%)</th>
+            <th class="num">Vol Share (%)</th><th class="num">Δ Share (pp)</th><th class="num">Distrib. (%)</th>
+          </tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="foot">Meridian BI · synthetic data for portfolio demonstration</div>
+</div></div>
+
+<script src="assets/pbi.js"></script>
+<script>
+function render(){
+  PBI.spark("sp1",[40,41,42,43,44,45,46,47,47.5,48,48.3,48.6],"--accent");
+  PBI.spark("sp2",[22.6,22.8,22.9,23.1,23.2,23.4,23.6,23.7,23.8,23.9,24.0,24.1],"--accent-2");
+  PBI.spark("sp3",[20.9,21.1,21.3,21.5,21.6,21.8,22.0,22.1,22.2,22.3,22.35,22.4],"--c3");
+  PBI.spark("sp4",[86.1,86.2,86.3,86.4,86.5,86.6,86.7,86.8,86.9,86.9,87.0,87.0],"--good");
+  PBI.spark("sp5",[5.86,5.86,5.85,5.85,5.85,5.84,5.84,5.84,5.84,5.84,5.84,5.84],"--warn");
+
+  const months=["May","Jun","Jul","Aug","Sep","Oct","Nov","Dec","Jan","Feb","Mar","Apr"];
+  PBI.combo("trend",{
+    labels:months,
+    bars:[3.6,3.8,4.0,4.1,4.0,4.2,4.3,4.5,3.9,4.0,4.1,4.3],
+    line:[22.6,22.8,22.9,23.1,23.2,23.4,23.6,23.7,23.8,23.9,24.0,24.1],
+    lineMin:21, lineMax:25
+  });
+
+  PBI.donut("mix",{ center:"48.6M", centerSub:"company volume",
+    data:[
+      {label:"Aero",value:41},{label:"Helix",value:24},
+      {label:"Nova",value:19},{label:"Lumen",value:11},{label:"Other",value:5}
+    ]});
+
+  PBI.barH("region",{ suffix:"%", dec:1, max:30, colorIndex:1, labelW:104,
+    rows:[
+      {label:"Centre",value:26.4,delta:2.1},
+      {label:"North-West",value:24.2,delta:1.5},
+      {label:"South",value:23.1,delta:1.8},
+      {label:"North-East",value:21.7,delta:0.9},
+      {label:"Islands",value:20.3,delta:-0.4}
+    ]});
+
+  const rows=[
+    ["Aero",19.9,11.9,9.2,"+2.9","91"],
+    ["Helix",11.7,5.9,5.4,"+1.4","84"],
+    ["Nova",9.2,3.7,4.2,"-0.3","79"],
+    ["Lumen",5.3,2.0,2.4,"+0.6","71"],
+    ["Other",2.5,0.6,1.2,"-0.2","58"]
+  ];
+  const tb=document.getElementById("tbody");
+  rows.forEach(r=>{
+    const tr=document.createElement("tr");
+    const cells=[r[0],r[1].toFixed(1),r[2].toFixed(1),r[3].toFixed(1),r[4],r[5]];
+    cells.forEach((c,i)=>{const td=document.createElement("td");
+      if(i>0)td.className="num"; td.textContent=c; tr.appendChild(td);});
+    tb.appendChild(tr);
+  });
+}
+window.addEventListener("load",()=>setTimeout(render,40));
+</script>
+</body>
+</html>

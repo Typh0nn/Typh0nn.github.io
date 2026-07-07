@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BI Capabilities</title>
+<link rel="stylesheet" href="assets/pbi.css">
+<style>
+  /* Neutral personal-brand theme (Slate Teal) */
+  :root{
+    --bg:#dde5e8; --canvas:#f4f7f8; --surface:#ffffff; --surface-2:#eef3f5;
+    --border:#dae3e6; --grid:#e9eff1; --ink:#152229; --ink-soft:#3e515b; --ink-mute:#7f8e96;
+    --accent:#2f7d8c; --accent-2:#c98a3b; --good:#2e9e6b; --bad:#d9534a; --warn:#e0a228;
+    --header-bg:#13232a; --logo-ink:#ffffff; --header-sub:#a7c0c7;
+  }
+  .caps{ flex:1; display:grid; grid-template-columns:1.05fr 1.05fr 1.0fr;
+    grid-template-rows:1fr 1fr auto; gap:11px; padding:13px 20px 16px; min-height:0; }
+  .calc{ grid-column:1/2; grid-row:1/3; }
+  .dim{  grid-column:2/3; grid-row:1/2; }
+  .data{ grid-column:2/3; grid-row:2/3; }
+  .sap{  grid-column:3/4; grid-row:1/3; }
+  .tool{ grid-column:1/4; grid-row:3/4; }
+  .card .cnt{ font-size:10.5px; font-weight:500; color:var(--ink-mute); }
+  .card .body{ overflow:auto; }
+  .lst{ list-style:none; margin:7px 0 0; padding:0; font-size:11px; color:var(--ink); }
+  .lst li{ padding:2.6px 0 2.6px 13px; line-height:1.2; break-inside:avoid; position:relative; }
+  .lst li::before{ content:""; position:absolute; left:0; top:8px; width:5px; height:5px;
+    border-radius:50%; background:var(--accent); }
+  .lst li b{ color:var(--accent); font-weight:700; }
+  .col2{ column-count:2; column-gap:22px; }
+  .col4{ column-count:4; column-gap:18px; }
+  .dimcols{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:0 14px; margin-top:2px; }
+  h6.sub{ font-size:10px; text-transform:uppercase; letter-spacing:.5px;
+    color:var(--ink-mute); margin:8px 0 0; font-weight:700; }
+  .dimcols .lst{ margin-top:3px; }
+  .dimcols .lst li{ padding-top:1.8px; padding-bottom:1.8px; }
+  .data .lst li b{ color:var(--accent-2); }
+  .sapl{ margin:3px 0 0; }
+  .sapl li{ font-size:10.2px; padding:1.9px 0 1.9px 12px; line-height:1.25; }
+  .sapl li::before{ top:7px; width:4px; height:4px; }
+</style>
+</head>
+<body>
+<div class="page"><div class="canvas">
+
+  <div class="hdr">
+    <div class="logo"><span class="mark">AS</span></div>
+    <div class="titles">
+      <span class="title">Adrian Skorupka — BI Reporting Capabilities</span>
+      <span class="sub">Master Data Manager · BI Expert — measures, dimensions, data domains &amp; SAP master-data t-codes</span>
+    </div>
+    <div class="spacer"></div>
+    <div class="asof">My work had coverage across<br><b>70+ markets · 500+ standing users · 12k+ reach</b></div>
+  </div>
+
+  <div class="caps">
+    <!-- MEASURES -->
+    <div class="card calc">
+      <div class="ttl">Calculations &amp; Measures <span class="cnt">— share, distribution, pricing, financial &amp; consumer KPIs</span></div>
+      <div class="body">
+        <ul class="lst col2">
+          <li>Share of Market <b>(SOM)</b></li>
+          <li>Share of Segment <b>(SOS)</b></li>
+          <li>Share of Value <b>(SOV)</b></li>
+          <li>Numeric Distribution <b>(ND)</b></li>
+          <li>Weighted Distribution <b>(WD)</b></li>
+          <li>Weighted Average Price <b>(WAP)</b></li>
+          <li>Price Index <b>(PI)</b></li>
+          <li>Retail Selling Price <b>(RSP)</b></li>
+          <li>Gross Margin <b>(GM)</b></li>
+          <li>Operating Company Contribution <b>(OCC)</b></li>
+          <li>Net Sales Value <b>(NSV)</b></li>
+          <li>Cost of Goods Sold <b>(COGS)</b></li>
+          <li>Year-to-Date <b>(YTD)</b></li>
+          <li>Prior Year-to-Date <b>(PYTD)</b></li>
+          <li>vs Prior Year <b>(PY)</b></li>
+          <li>vs Annual Plan <b>(AP)</b></li>
+          <li>vs Latest Estimate <b>(LE)</b></li>
+          <li>Percentage-point change <b>(pp)</b></li>
+          <li>Week-on-Week <b>(WoW)</b></li>
+          <li>Moving Annual Total <b>(MAT)</b></li>
+          <li>Total / Category Incidence</li>
+          <li>Brand Funnel conversion</li>
+          <li>Net Switching</li>
+          <li>Most Often Brand <b>(MOB)</b></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DIMENSIONS -->
+    <div class="card dim">
+      <div class="ttl">Dimensions <span class="cnt">— how the facts are sliced</span></div>
+      <div class="body">
+        <div class="dimcols">
+          <div>
+            <h6 class="sub">Product data</h6>
+            <ul class="lst">
+              <li>Manufacturer / Company</li><li>Category</li><li>Brand Family</li><li>Brand</li><li>SKU</li>
+              <li>Price Segment</li><li>Format / Pack</li><li>Flavour / Variant</li>
+              
+            </ul>
+          </div>
+          <div>
+            <h6 class="sub">Market</h6>
+            <ul class="lst">
+              <li>Market / Country</li><li>Channel</li><li>Region</li><li>Sub-area</li>
+            </ul>
+            <h6 class="sub">Time</h6>
+            <ul class="lst">
+              <li>Week</li><li>Month</li><li>Quarter</li><li>Year-to-Date</li>
+            </ul>
+          </div>
+          <div>
+            <h6 class="sub">Customer</h6>
+            <ul class="lst">
+              <li>Sales Orders</li><li>Deliveries</li><li>Inventory / Stock</li>
+              <li>Backorders</li><li>Returns</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DATA DOMAINS -->
+    <div class="card data">
+      <div class="ttl">Data Domains <span class="cnt">— sources I model &amp; integrate</span></div>
+      <div class="body">
+        <ul class="lst col2">
+          <li>Financial — actuals, plan, OCC, GM, COGS, revenue</li>
+          <li>Sell-in, sell-out</li>
+          <li>Shipments</li>
+          <li>Distribution / Retail Audit (off-take)</li>
+          <li>Consumer — incidence, tracker, funnel, switching</li>
+          <li>Market / Universe data</li>
+          <li>Pricing</li>
+          <li>Customer Master Data</li>
+          <li>Product Master Data</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SAP TRANSACTIONS -->
+    <div class="card sap">
+      <div class="ttl">SAP Transactions <span class="cnt">— master-data &amp; query t-codes I work with</span></div>
+      <div class="body">
+        <h6 class="sub">Customer data</h6>
+        <ul class="lst sapl">
+          <li><b>XD03 / VD03</b> — Display customer central &amp; sales data (addresses, payment, Incoterms)</li>
+          <li><b>OV51</b> — Review customer master change history</li>
+          <li><b>MASS</b> — Mass maintenance of customer records</li>
+          <li><b>VCUST</b> — Generate customer contact lists</li>
+          <li><b>VAP1</b> — Manage customer contact persons</li>
+          <li><b>XD05 / XD06</b> — Block customers / flag for deletion</li>
+        </ul>
+        <h6 class="sub">Material master</h6>
+        <ul class="lst sapl">
+          <li><b>MM03</b> — Display detailed material (product) data</li>
+          <li><b>MM04</b> — Analyse material master change history</li>
+          <li><b>MM60</b> — Material list with statuses &amp; prices</li>
+          <li><b>MM17</b> — Mass update of material records</li>
+          <li><b>MMH1 / MMPI</b> — Manage material posting periods for orders</li>
+          <li><b>MMRV / OMSY</b> — Check &amp; set material financial periods</li>
+        </ul>
+        <h6 class="sub">Price records</h6>
+        <ul class="lst sapl">
+          <li><b>VK13</b> — Display price records &amp; active discounts</li>
+          <li><b>V/LD</b> — Pricing reports by customer / material group</li>
+        </ul>
+        <h6 class="sub">System tools &amp; tables</h6>
+        <ul class="lst sapl">
+          <li><b>SE16N</b> — Direct view of system tables (MARA, MARC, KNA1)</li>
+          <li><b>SQ01</b> — Build &amp; run SAP Query for data extraction</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TOOLS -->
+    <div class="card tool">
+      <div class="ttl">Tools &amp; Stack <span class="cnt">— build, model &amp; automate</span></div>
+      <div class="body">
+        <ul class="lst col4">
+          <li>Power BI — DAX</li>
+          <li>MS Power Query</li>
+          <li>SQL</li>
+          <li>Python</li>
+          <li>Databricks</li>
+          <li>SAP: S/4HANA, ERP, Analytics Cloud</li>
+          <li>Azure Analysis Services</li>
+          <li>Power Automate</li>
+          <li>MS Access</li>
+          <li>Advanced Excel</li>
+          <li>SharePoint</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>
