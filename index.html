@@ -1,44 +1,249 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moje PBI Portfolio</title>
-    <link rel="stylesheet" href="css/styles.css"> <!-- Link do pliku CSS -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adrian Skorupka — Power BI Portfolio</title>
+<meta name="description" content="Power BI report design portfolio — Master Data Manager / BI Expert. FMCG analytics, executive dashboards, data governance capabilities.">
+<style>
+  :root{
+    --bg:#0d1117; --surface:#161b22; --surface-2:#1c2129; --border:#30363d; --border-hover:#484f58;
+    --ink:#c9d1d9; --soft:#9198a1; --mute:#6e7681;
+    --accent:#58a6ff; --accent-soft:rgba(88,166,255,.12);
+    --font:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono",Consolas,"Liberation Mono",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--font);
+    min-height:100vh;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:56px 24px 40px}
+  a{color:var(--accent)}
+
+  /* ---- header ---- */
+  header{display:flex;align-items:flex-start;justify-content:space-between;gap:32px;
+    flex-wrap:wrap;margin-bottom:56px;padding-bottom:40px;border-bottom:1px solid var(--border)}
+  .who{display:flex;gap:18px;align-items:center}
+  .mark{width:56px;height:56px;border-radius:14px;flex:none;
+    background:linear-gradient(135deg,#58a6ff,#26d3c6);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;color:#0d1117}
+  h1{font-size:26px;letter-spacing:.2px;color:#fff}
+  .role{color:var(--accent);font-weight:600;font-size:14px;margin-top:4px}
+  .lead{color:var(--soft);max-width:560px;margin-top:12px;font-size:14px;line-height:1.6}
+  .cta{display:flex;flex-direction:column;gap:10px;align-items:flex-start;padding-top:4px}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;
+    color:var(--ink);background:var(--surface);border:1px solid var(--border);
+    border-radius:8px;padding:9px 16px;text-decoration:none;transition:border-color .15s,background .15s}
+  .btn:hover{border-color:var(--border-hover);background:var(--surface-2)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#0d1117}
+  .btn.primary:hover{background:#79b8ff;border-color:#79b8ff}
+  .btn svg{width:15px;height:15px;flex:none}
+
+  /* ---- section labels ---- */
+  .section-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+    color:var(--mute);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .section-label::after{content:"";flex:1;height:1px;background:var(--border)}
+
+  /* ---- featured capabilities card ---- */
+  .featured{display:block;text-decoration:none;color:inherit;margin-bottom:64px;
+    background:linear-gradient(180deg,var(--surface),var(--surface-2));
+    border:1px solid var(--border);border-radius:16px;overflow:hidden;
+    display:grid;grid-template-columns:1.1fr .9fr;gap:0;
+    transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease}
+  .featured:hover{border-color:#2f7d8c;transform:translateY(-2px);
+    box-shadow:0 20px 50px rgba(0,0,0,.45)}
+  .featured .shot{background:#0a0e14;display:flex;align-items:center;justify-content:center;
+    padding:20px;border-right:1px solid var(--border)}
+  .featured .shot img{width:100%;height:auto;border-radius:8px;
+    box-shadow:0 12px 30px rgba(0,0,0,.5);display:block}
+  .featured .copy{padding:36px 40px;display:flex;flex-direction:column;justify-content:center}
+  .featured .tag{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:700;
+    letter-spacing:.5px;text-transform:uppercase;color:#6fd6e0;background:rgba(47,125,140,.18);
+    border:1px solid rgba(47,125,140,.4);border-radius:999px;padding:4px 12px;margin-bottom:14px}
+  .featured h2{font-size:24px;color:#fff;margin-bottom:10px}
+  .featured p{color:var(--soft);font-size:14.5px;line-height:1.65;margin-bottom:18px}
+  .featured .skills{display:flex;flex-wrap:wrap;gap:7px}
+
+  /* ---- 3x3 grid ---- */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:20px}
+  a.card{display:flex;flex-direction:column;text-decoration:none;color:inherit;
+    background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;
+    border-top:3px solid var(--card-accent,var(--accent));
+    transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease}
+  a.card:hover{transform:translateY(-4px);border-color:var(--border-hover);
+    box-shadow:0 14px 34px rgba(0,0,0,.4)}
+  .card .shot{aspect-ratio:1280/720;overflow:hidden;background:#0a0e14;border-bottom:1px solid var(--border)}
+  .card .shot img{width:100%;height:100%;object-fit:cover;object-position:top;
+    display:block;transition:transform .25s ease}
+  a.card:hover .shot img{transform:scale(1.035)}
+  .meta{padding:16px 18px 20px}
+  .meta h3{font-size:15px;color:#fff;margin-bottom:6px}
+  .meta p{color:var(--soft);font-size:12.5px;line-height:1.55;min-height:52px}
+  .skills{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
+  .skills span{font-size:10.5px;color:var(--soft);border:1px solid var(--border);
+    padding:2.5px 9px;border-radius:999px;background:var(--surface-2)}
+
+  /* ---- footer ---- */
+  .note{color:var(--mute);font-size:12px;line-height:1.6;margin:36px 0 28px;max-width:760px}
+  footer{border-top:1px solid var(--border);padding-top:24px;display:flex;
+    justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+    color:var(--mute);font-size:12px}
+  footer .flinks{display:flex;gap:18px}
+  footer a{color:var(--soft);text-decoration:none}
+  footer a:hover{color:var(--accent)}
+
+  @media (max-width:860px){
+    .featured{grid-template-columns:1fr}
+    .featured .shot{border-right:none;border-bottom:1px solid var(--border)}
+    .grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:600px){
+    .wrap{padding:36px 16px 32px}
+    header{flex-direction:column}
+    .grid{grid-template-columns:1fr}
+  }
+</style>
 </head>
 <body>
-    <h1>Moje PBI Portfolio</h1>
-    <div class="dashboard-container">
-        <div class="dashboard">
-            <iframe src="HTML/10-bi-capabilities.html" frameborder="0"></iframe>
-        </div>
-        <div class="dashboard">
-            <iframe src="HTML/01-market-one-pager.html" frameborder="0"></iframe>
-        </div>
-        <div class="dashboard">
-            <iframe src="HTML/02-performance-dashboard.html" frameborder="0"></iframe>
-        </div>
-        <div class="dashboard">
-            <iframe src="HTML/03-weekly-pulse.html" frameborder="0"></iframe>
-        </div>
-        <div class="dashboard">
-            <iframe src="HTML/04-share-of-market.html" frameborder="0"></iframe>
-        </div>
-        <div class="dashboard">
-            <iframe src="HTML/05-regional-brand.html" frameborder="0"></iframe>
-        </div>
-        <div class="dashboard">
-            <iframe src="HTML/06-tables-filters.html" frameborder="0"></iframe>
-        </div>
-        <div class="dashboard">
-            <iframe src="HTML/07-volume-finance.html" frameborder="0"></iframe>
-        </div>
-        <div class="dashboard">
-            <iframe src="HTML/08-market-overview.html" frameborder="0"></iframe>
-        </div>
-        <div class="dashboard">
-            <iframe src="HTML/09-monthly-summary.html" frameborder="0"></iframe>
-        </div>
+<div class="wrap">
+
+  <header>
+    <div class="who">
+      <div class="mark">AS</div>
+      <div>
+        <h1>Adrian Skorupka</h1>
+        <div class="role">Master Data Manager · BI Expert — Power BI report design &amp; theming</div>
+        <p class="lead">A selection of Power BI report designs built for FMCG market analytics —
+          executive one-pagers, performance dashboards, weekly trackers, share-of-market reports,
+          and a full reference of the data model and capabilities behind them.</p>
+      </div>
     </div>
+    <div class="cta">
+      <a class="btn primary" href="mailto:adrian.skorupka@gmail.com">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1.75 2A1.75 1.75 0 0 0 0 3.75v.736a.75.75 0 0 0 .015.15l7.51 4.297a.75.75 0 0 0 .75 0l7.51-4.297A.75.75 0 0 0 16 4.486V3.75A1.75 1.75 0 0 0 14.25 2H1.75ZM16 6.06l-6.75 3.858a2.25 2.25 0 0 1-2.5 0L0 6.06V12.25C0 13.216.784 14 1.75 14h12.5A1.75 1.75 0 0 0 16 12.25V6.06Z"/></svg>
+        adrian.skorupka@gmail.com
+      </a>
+      <a class="btn" href="https://github.com/Typh0nn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </header>
+
+  <div class="section-label">Start here — capabilities</div>
+  <a class="featured" href="10-bi-capabilities.html">
+    <div class="shot"><img src="png/10-bi-capabilities.png" alt="BI Capabilities reference dashboard preview" loading="lazy" width="1280" height="720"></div>
+    <div class="copy">
+      <span class="tag">Reference · read this first</span>
+      <h2>Calculations, Filters &amp; Data Domains</h2>
+      <p>One-page reference of the measures (SOM, SOS, SOV, WAP, MAT…), slicer types and data
+        sources I build with across FMCG markets — the vocabulary and toolkit behind every
+        dashboard below. SAP master-data &amp; query t-codes I work with, and the data domains
+        (financial, shipments, distribution, consumer, pricing) each report draws on.</p>
+      <div class="skills"><span>Measures &amp; KPIs</span><span>Slicer types</span><span>Data domains</span><span>SAP t-codes</span><span>Tools &amp; stack</span></div>
+    </div>
+  </a>
+
+  <div class="section-label">Dashboards</div>
+  <div class="grid">
+    <a class="card" style="--card-accent:#1f5fd6" href="01-market-one-pager.html">
+      <div class="shot"><img src="png/01-market-one-pager.png" alt="Market One-Pager dashboard preview" loading="lazy" width="1280" height="720"></div>
+      <div class="meta">
+        <h3>Executive Market One-Pager</h3>
+        <p>Single-page exec summary: KPI cards, 12-month volume/share trend, brand mix and
+           regional share at a glance.</p>
+        <div class="skills"><span>KPI cards</span><span>Combo chart</span><span>Donut</span><span>Matrix</span></div>
+      </div>
+    </a>
+    <a class="card" style="--card-accent:#0f9d6b" href="02-performance-dashboard.html">
+      <div class="shot"><img src="png/02-performance-dashboard.png" alt="Category Performance dashboard preview" loading="lazy" width="1280" height="720"></div>
+      <div class="meta">
+        <h3>Category Performance Dashboard</h3>
+        <p>Multi-visual analytical page: volume vs share combo, price-segment mix, brand
+           evolution lines and regional breakdown.</p>
+        <div class="skills"><span>Stacked %</span><span>Multi-line</span><span>Slicers</span><span>Geo bars</span></div>
+      </div>
+    </a>
+    <a class="card" style="--card-accent:#6f8bff" href="03-weekly-pulse.html">
+      <div class="shot"><img src="png/03-weekly-pulse.png" alt="Weekly Pulse Tracker dashboard preview" loading="lazy" width="1280" height="720"></div>
+      <div class="meta">
+        <h3>Weekly Pulse Tracker (dark)</h3>
+        <p>Operational WoW tracker with sparkline KPIs, top-movers, and a RAG status matrix —
+           rendered in a dark theme.</p>
+        <div class="skills"><span>Dark mode</span><span>Sparklines</span><span>RAG status</span><span>Δ WoW</span></div>
+      </div>
+    </a>
+    <a class="card" style="--card-accent:#c2772a" href="04-share-of-market.html">
+      <div class="shot"><img src="png/04-share-of-market.png" alt="Share of Market dashboard preview" loading="lazy" width="1280" height="720"></div>
+      <div class="meta">
+        <h3>Share of Market (SOM) Report</h3>
+        <p>Competitive share view: brand SOM evolution, 100% manufacturer mix, variant
+           treemap and area SOM/SOS matrix.</p>
+        <div class="skills"><span>Treemap</span><span>100% stacked</span><span>SOM/SOS</span><span>Ranked</span></div>
+      </div>
+    </a>
+    <a class="card" style="--card-accent:#6a4ea3" href="05-regional-brand.html">
+      <div class="shot"><img src="png/05-regional-brand.png" alt="Regional Brand Performance dashboard preview" loading="lazy" width="1280" height="720"></div>
+      <div class="meta">
+        <h3>Regional Brand Performance (map)</h3>
+        <p>Geographic brand performance on a country map split into West / East / North / South
+           regions, plus ranking, trend, segment mix and competitor share.</p>
+        <div class="skills"><span>Map / bubbles</span><span>Geo SOM</span><span>Sidebar nav</span><span>Donut</span></div>
+      </div>
+    </a>
+    <a class="card" style="--card-accent:#0a9bc2" href="06-tables-filters.html">
+      <div class="shot"><img src="png/06-tables-filters.png" alt="SKU Explorer tables and filters dashboard preview" loading="lazy" width="1280" height="720"></div>
+      <div class="meta">
+        <h3>Tables &amp; Filters (SKU Explorer)</h3>
+        <p>KPI strip over a detailed SKU table with data bars and in-row sparklines,
+           plus a full slicer rail (dropdowns, multi-select, range).</p>
+        <div class="skills"><span>Data table</span><span>Data bars</span><span>Slicers</span><span>Sparklines</span></div>
+      </div>
+    </a>
+    <a class="card" style="--card-accent:#9b2f44" href="07-volume-finance.html">
+      <div class="shot"><img src="png/07-volume-finance.png" alt="Volume and Financial Performance dashboard preview" loading="lazy" width="1280" height="720"></div>
+      <div class="meta">
+        <h3>Volume &amp; Financial Performance</h3>
+        <p>Market size &amp; SOM, Gross Margin &amp; Operating Contribution trends, SOM vs Annual
+           Plan, pricing ladder and format mix.</p>
+        <div class="skills"><span>Combo</span><span>Vs Plan</span><span>Pricing</span><span>Finance KPIs</span></div>
+      </div>
+    </a>
+    <a class="card" style="--card-accent:#3b4c9a" href="08-market-overview.html">
+      <div class="shot"><img src="png/08-market-overview.png" alt="Market Performance Overview dashboard preview" loading="lazy" width="1280" height="720"></div>
+      <div class="meta">
+        <h3>Market Performance — Overview</h3>
+        <p>Management overview: volume &amp; SOM trend, manufacturer SOM lines, SOM by
+           price segment &amp; format, and Top Brands ranking.</p>
+        <div class="skills"><span>Multi-line</span><span>Stacked SOM</span><span>Sidebar nav</span><span>Ranked</span></div>
+      </div>
+    </a>
+    <a class="card" style="--card-accent:#34618f" href="09-monthly-summary.html">
+      <div class="shot"><img src="png/09-monthly-summary.png" alt="Market Performance Monthly Summary dashboard preview" loading="lazy" width="1280" height="720"></div>
+      <div class="meta">
+        <h3>Market Performance — Monthly Summary</h3>
+        <p>Executive monthly read-out: shipments column, SOM trend, a driver-focused
+           insights panel, segment donut and Top Brands.</p>
+        <div class="skills"><span>Column</span><span>Insights panel</span><span>Donut</span><span>KPIs</span></div>
+      </div>
+    </a>
+  </div>
+
+  <p class="note">Note: all figures are <b>synthetic</b> and every company, brand and market name is
+    <b>fictional</b> — each dashboard uses a different fictional company and product category. These
+    mockups recreate report layouts I authored, with confidential data and identifiers removed.
+    Built with hand-coded HTML + SVG (no external charting libraries) so every chart renders
+    instantly, with no dependencies.</p>
+
+  <footer>
+    <span>© 2026 Adrian Skorupka</span>
+    <div class="flinks">
+      <a href="mailto:adrian.skorupka@gmail.com">Email</a>
+      <a href="https://github.com/Typh0nn" target="_blank" rel="noopener">GitHub</a>
+      <a href="10-bi-capabilities.html">Capabilities</a>
+    </div>
+  </footer>
+
+</div>
 </body>
 </html>
