@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI &amp; Automation — Adrian Skorupka</title>
+<meta name="description" content="Production AI agent systems in Python — multi-provider LLM layer, LangGraph orchestration, per-call cost governance, LLM-as-judge evaluation, browser automation, Cloudflare Workers.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="nav">
+    <a class="brand" href="index.html">
+      <div class="mark">AS</div>
+      <div><b>Adrian Skorupka</b><span>Master Data &amp; Business Intelligence</span></div>
+    </a>
+    <div class="links">
+      <a href="index.html">Overview</a>
+      <a href="bi-reporting.html">BI &amp; Reporting</a>
+      <a href="master-data.html">Master Data</a>
+      <a href="ai-automation.html" aria-current="page">AI &amp; Automation</a>
+      <a href="cv/adrian-skorupka-cv-ic.pdf">CV</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <h1>AI &amp; Automation</h1>
+    <div class="role">Python · LangGraph · multi-provider LLM orchestration · cost governance · LLM-as-judge · Cloudflare Workers</div>
+    <p class="lead">Plenty of people can get a demo out of an LLM. The interesting problem is the part
+      after that: what happens when a call times out, when a model costs more than the task is worth,
+      when the output is confidently wrong, and when a human needs to approve something before it
+      goes out. I build the controls, not just the prompts — and the data layer underneath them, which
+      is where my BI and master data background actually pays off.</p>
+    <div class="cta">
+      <a class="btn primary" href="mailto:adrian.skorupka@gmail.com">adrian.skorupka@gmail.com</a>
+      <a class="btn" href="cv/adrian-skorupka-cv-ic.pdf">CV — Individual contributor (PDF)</a>
+      <a class="btn" href="https://github.com/Typh0nn" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+
+  <div class="section-label">The system</div>
+  <div class="cases">
+
+    <article class="case" style="--track:var(--ai)">
+      <div class="where">Independent · multi-agent orchestration platform</div>
+      <h3>An orchestration platform that treats LLM calls as something to be governed</h3>
+      <dl>
+        <dt>Shape</dt>
+        <dd>An asynchronous <b>multi-provider LLM layer</b> — Claude, OpenAI, DeepSeek and local
+          Ollama behind one interface, with retry and timeout handling — driven by
+          <b>LangGraph state-machine orchestration</b> so a run has explicit states rather than an
+          open-ended loop. Browser-automation agents on Playwright handle the work that only exists
+          behind a web UI. Deployed on <b>Cloudflare Workers</b>.</dd>
+        <dt>Controls</dt>
+        <dd><b>Cost governance</b>: spend tracked per model call against enforced budgets, so a run
+          cannot quietly burn money. <b>LLM-as-judge</b> evaluation layer for automated output quality
+          control. <b>Human-in-the-loop approval gates</b> on the decisions that should not be
+          automated at all — the model proposes, a person signs off.</dd>
+        <dt>Why it matters commercially</dt>
+        <dd>Local models where they are good enough, frontier models only where they earn it. That is
+          the same instinct as retiring a manual reporting process: work out what the task is actually
+          worth, then build to that.</dd>
+      </dl>
+      <div class="stack"><span>Python</span><span>asyncio</span><span>LangGraph</span><span>CrewAI</span><span>Pydantic</span><span>FastAPI</span><span>Playwright</span><span>Claude API</span><span>OpenAI API</span><span>DeepSeek</span><span>Ollama</span><span>MCP</span><span>Docker</span><span>Cloudflare Workers</span></div>
+    </article>
+
+    <article class="case" style="--track:var(--ai)">
+      <div class="where">Coty Inc. · applied inside a corporate function</div>
+      <h3>A "Data Brain" and agentic frameworks inside a supply chain organisation</h3>
+      <dl>
+        <dt>Context</dt>
+        <dd>Customer Service reporting drew on data scattered across systems, and answering a customer
+          accurately meant a person assembling context by hand each time.</dd>
+        <dt>Approach</dt>
+        <dd>Partnered with IT and used <b>Databricks</b> for cross-functional context engineering,
+          building a unified <b>"Data Brain"</b> and agentic AI frameworks on top of it to automate
+          complex reporting and improve Customer Service response accuracy.</dd>
+        <dt>Result</dt>
+        <dd>AI agents deployed against real departmental reporting, reducing manual effort — inside a
+          regulated corporate environment, not a sandbox.</dd>
+      </dl>
+      <div class="stack"><span>Databricks</span><span>Context engineering</span><span>Agentic AI</span><span>Reporting automation</span></div>
+    </article>
+
+    <article class="case" style="--track:var(--ai)">
+      <div class="where">Independent · client consulting</div>
+      <h3>The data layer under the agent, which is usually the real work</h3>
+      <dl>
+        <dt>What clients ask for</dt>
+        <dd>An AI solution. What they usually need first is schema design, source consolidation and
+          validation logic — dispersed operational data from ERP, CRM and project management platforms
+          turned into a consistent, analysis-ready model.</dd>
+        <dt>What I deliver</dt>
+        <dd>That model, plus the production controls around whatever sits on top of it: per-call cost
+          tracking, validation, and human-in-the-loop approval gates. Then dashboards and KPI
+          frameworks that translate it back into something a non-technical stakeholder can act on.</dd>
+        <dt>Positioning</dt>
+        <dd>I am a master data and BI specialist who builds AI systems, not an ML researcher. The
+          value I add is knowing what "good data" means before the model ever sees it.</dd>
+      </dl>
+      <div class="stack"><span>Schema design</span><span>Source consolidation</span><span>Validation logic</span><span>Cost tracking</span><span>HITL gates</span><span>KPI frameworks</span></div>
+    </article>
+
+  </div>
+
+  <div class="section-label">How I think about building with LLMs</div>
+  <div class="caps">
+    <section style="--track:var(--ai)">
+      <h3>Cost before capability</h3>
+      <ul>
+        <li>Cheap and local models by default; frontier models only where they change the outcome</li>
+        <li>Spend tracked per call, enforced against a budget</li>
+        <li>Model choice as configuration, never hard-coded</li>
+      </ul>
+    </section>
+    <section style="--track:var(--ai)">
+      <h3>Explicit state, not open loops</h3>
+      <ul>
+        <li>LangGraph state machines over free-running agent loops</li>
+        <li>Retry and timeout handling as a first-class concern</li>
+        <li>Typed contracts with Pydantic so failures are visible early</li>
+      </ul>
+    </section>
+    <section style="--track:var(--ai)">
+      <h3>A human on the high-stakes call</h3>
+      <ul>
+        <li>Approval gates before anything irreversible or outward-facing</li>
+        <li>LLM-as-judge for automated quality control on the rest</li>
+        <li>Automation earns trust incrementally, it is not granted upfront</li>
+      </ul>
+    </section>
+  </div>
+
+  <p class="note">This is current, hands-on work rather than a course certificate — an ongoing personal
+    platform plus client engagements. Happy to walk through the architecture, the failure modes I hit,
+    and what I would do differently.</p>
+
+  <footer>
+    <span>© 2026 Adrian Skorupka</span>
+    <div class="flinks">
+      <a href="index.html">Overview</a>
+      <a href="bi-reporting.html">BI &amp; Reporting</a>
+      <a href="master-data.html">Master Data</a>
+      <a href="mailto:adrian.skorupka@gmail.com">Email</a>
+      <a href="https://github.com/Typh0nn" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Adrian Skorupka - Senior BI Developer and Master Data Expert - CV</title>
+<style>
+  /* ATS-safe: jedna kolumna, brak letter-spacing, brak text-boxow/tabel,
+     standardowe naglowki sekcji, tekst zawsze w normalnym przeplywie.
+     Marginesy przez @page (dzialaja na KAZDEJ stronie, w przeciwienstwie
+     do padding na body, ktory dziala tylko na pierwszej i ostatniej). */
+  /* @page margin MUSI byc 0 — przy niezerowym marginesie Chrome/Edge doklejaja
+     wlasny naglowek i stopke (data + file:///), a flaga --print-to-pdf-no-header
+     jest w obu przegladarkach ignorowana (sprawdzone). Marginesy realizuje wiec
+     padding kontenera .page, ktory dziala na KAZDEJ stronie. */
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-size: 8.8pt;
+    line-height: 1.33;
+    color: #263544;
+    background: #FFFFFF;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    padding: 14mm 13mm;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  a { color: #2E5C8A; text-decoration: none; }
+
+  /* ---------- naglowek ---------- */
+  .header {
+    background: #F1F6FB;
+    border-bottom: 3pt solid #1B2A44;
+    padding: 4mm 5mm 4mm 5mm;
+    margin-bottom: 5mm;
+    overflow: hidden;
+  }
+  .photo {
+    float: right;
+    width: 54mm;
+    height: 54mm;
+    object-fit: cover;
+    border-radius: 2mm;
+    border: 2pt solid #FFFFFF;
+    box-shadow: 0 0 0 1pt #A9C4DC;
+    margin-left: 7mm;
+  }
+  h1 {
+    font-size: 27pt;
+    font-weight: 700;
+    color: #1B2A44;
+    line-height: 1.05;
+    letter-spacing: normal;
+  }
+  .headline {
+    font-size: 12.5pt;
+    font-weight: 600;
+    color: #2E5C8A;
+    margin-top: 2mm;
+    padding-bottom: 3mm;
+    border-bottom: 1pt solid #C8D9E8;
+    letter-spacing: normal;
+  }
+  .contact { font-size: 9.3pt; color: #3D5266; margin-top: 3mm; line-height: 1.65; }
+  .contact b { color: #1B2A44; }
+
+  /* ---------- sekcje ---------- */
+  h2 {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #1B2A44;
+    text-transform: uppercase;
+    letter-spacing: normal;
+    border-bottom: 2.5pt solid #A9C4DC;
+    padding-bottom: 1.5mm;
+    margin-top: 6mm;
+    margin-bottom: 3.5mm;
+    page-break-after: avoid;
+  }
+  h2:first-of-type { margin-top: 0; }
+
+  p { margin-bottom: 2mm; }
+
+  .summary {
+    background: #F7FAFD;
+    border-left: 3pt solid #A9C4DC;
+    padding: 3mm 4mm;
+    text-align: justify;
+  }
+
+  /* ---------- umiejetnosci ---------- */
+  .skill-line { margin-bottom: 2mm; padding-left: 3mm; border-left: 2pt solid #DCE7F2; }
+  .skill-cat { font-weight: 700; color: #1B2A44; }
+
+  /* ---------- doswiadczenie ---------- */
+  .company {
+    background: #1B2A44;
+    color: #FFFFFF;
+    padding: 1.6mm 3mm;
+    font-size: 10.5pt;
+    font-weight: 700;
+    margin-top: 4.5mm;
+    page-break-after: avoid;
+  }
+  .role {
+    font-size: 9.8pt;
+    font-weight: 700;
+    color: #1B2A44;
+    margin-top: 2mm;
+    page-break-after: avoid;
+  }
+  .role-date { font-weight: 400; color: #5E7186; }
+
+  .sublabel {
+    font-size: 8.6pt;
+    font-weight: 700;
+    color: #2E5C8A;
+    text-transform: uppercase;
+    margin-top: 2.2mm;
+    margin-bottom: 0.8mm;
+    page-break-after: avoid;
+  }
+
+  ul { margin: 0; padding-left: 5mm; }
+  li { margin-bottom: 1.2mm; }
+  li::marker { color: #2E5C8A; }
+
+  /* ---------- edukacja ---------- */
+  .edu-line { margin-bottom: 2.2mm; padding-left: 3mm; border-left: 2pt solid #DCE7F2; }
+  .edu-school { color: #5E7186; }
+</style>
+</head>
+<body>
+
+<div class="page">
+<div class="header">
+  <img class="photo" src="1690978201429.jpg" alt="Adrian Skorupka">
+  <h1>Adrian Skorupka</h1>
+  <div class="headline">Senior BI Developer &amp; Master Data Expert</div>
+  <div class="contact">
+    <b>Warsaw, Poland</b> &middot; Open to remote<br>
+    <a href="mailto:adrian.skorupka@gmail.com">adrian.skorupka@gmail.com</a><br>
+    <a href="https://www.linkedin.com/in/adrian-skorupka-26978718a">linkedin.com/in/adrian-skorupka-26978718a</a><br>
+    <a href="https://typh0nn.github.io">typh0nn.github.io</a> &ndash; Power BI portfolio
+  </div>
+</div>
+
+<h2>Professional Summary</h2>
+<div class="summary">
+Master Data and Business Intelligence expert with 8+ years of hands-on experience in data governance, Power BI
+development and reporting automation across global FMCG and consulting environments. Built Power BI solutions
+covering 70+ markets, generating 450+ views daily for over 300 stakeholders, and automated 20+ manual reporting
+processes delivering efficiency gains equivalent to 3 FTEs. Combines deep practical knowledge of SAP S/4HANA,
+Databricks, Azure and SQL with production-grade AI agent development in Python.
+</div>
+
+<h2>Technical Skills</h2>
+<div class="skill-line"><span class="skill-cat">Business Intelligence:</span> Power BI (DAX, Power Query, composite models, row-level security), SAP Analytics Cloud, data visualization, KPI frameworks, report design, dashboard development</div>
+<div class="skill-line"><span class="skill-cat">Data &amp; Cloud:</span> SQL, Azure SQL Data Warehouse, Azure Analysis Services, Databricks, data modelling, ETL, data warehousing, data integration</div>
+<div class="skill-line"><span class="skill-cat">Master Data &amp; ERP:</span> SAP S/4HANA, SAP ERP, SAP Ariba, SAP SuccessFactors, master data governance, data quality, data validation, single source of truth, product data management</div>
+<div class="skill-line"><span class="skill-cat">AI &amp; Automation:</span> Python, Claude API, OpenAI API, DeepSeek, Ollama, LangGraph, CrewAI, Pydantic, FastAPI, Playwright, n8n, MCP, Docker, Cloudflare, Power Automate</div>
+<div class="skill-line"><span class="skill-cat">Methods &amp; Tools:</span> LEAN, Agile, Scrum, Six Sigma, process mapping, stakeholder management, SharePoint, Excel, Jira, Kanbanize, Wrike</div>
+
+<h2>Work Experience</h2>
+
+<div class="company">Independent Consulting / Freelance</div>
+<div class="role">Data &amp; AI Consultant <span class="role-date">| 04/2026 &ndash; Present</span></div>
+<div class="sublabel">Responsibilities</div>
+<ul>
+  <li>Delivering short-cycle consulting engagements in Power BI reporting, data modelling and preparation of structured datasets for AI-driven applications, including work for international clients sourced through freelance platforms.</li>
+  <li>Designing and implementing AI agent solutions for clients, including the underlying data layer and production controls &mdash; schema design, source consolidation, validation logic, per-call cost tracking and human-in-the-loop approval gates.</li>
+  <li>Advising clients on structuring dispersed operational data from ERP, CRM and project management platforms into consistent, analysis-ready models.</li>
+  <li>Building dashboards and KPI frameworks translating raw operational data into decision-ready insight for non-technical stakeholders.</li>
+</ul>
+<div class="sublabel">Achievements</div>
+<ul>
+  <li>Developed a multi-agent orchestration platform in Python: asynchronous multi-provider LLM layer (Claude, OpenAI, DeepSeek, local Ollama) with retry and timeout handling, LangGraph state-machine orchestration, browser-automation agents and Cloudflare Workers deployment.</li>
+  <li>Implemented cost-governance tooling tracking spend per model call against enforced budgets, combined with an LLM-as-judge evaluation layer for automated output quality control.</li>
+</ul>
+
+</div><!-- /page 1 -->
+
+<div class="page">
+<div class="company" style="margin-top:0;">Coty Inc., Spain</div>
+<div class="role">Customer Service Master Data Manager <span class="role-date">| 11/2025 &ndash; 04/2026</span></div>
+<div class="sublabel">Responsibilities</div>
+<ul>
+  <li><b>Strategic Leadership &amp; Governance:</b> Reporting directly to the VP Supply Chain Europe, leading the regional Customer Service Master Data team across Iberia, Canary Islands, Benelux and Italy to ensure data excellence and supply chain agility.</li>
+  <li><b>Data Brain &amp; AI Architecture:</b> Partnering with IT and utilizing Databricks for cross-functional context engineering; developed a unified "Data Brain" and agentic AI frameworks to automate complex reporting and enhance Customer Service response accuracy.</li>
+  <li><b>Process Standardization:</b> Leading the harmonization of regional workflows to eliminate operational silos, establishing a unified "single source of truth" for master data across all in-scope markets.</li>
+  <li><b>Digital Transformation:</b> Transitioning the regional team from manual processing to automated, data-driven workflows; focusing on technical upskilling in SQL and Power BI to build a high-performing, future-ready organization.</li>
+</ul>
+<div class="sublabel">Achievements</div>
+<ul>
+  <li><b>Process Mapping Excellence:</b> Conducted advanced process mapping and standardization for over 300 services provided by the team, significantly increasing operational transparency and service consistency.</li>
+  <li><b>Strategic AI Integration:</b> Successfully engineered cross-functional data connections in Databricks, enabling the deployment of AI agents that reduced manual effort in departmental reporting.</li>
+  <li><b>Automated Validation:</b> Implemented automated data validation scripts for the Benelux (BNL) and Southern Europe markets, ensuring 100% data readiness before SAP to Databricks migration.</li>
+</ul>
+
+<div class="company">Japan Tobacco International</div>
+<div class="role">Master Data Manager <span class="role-date">| 09/2024 &ndash; 10/2025</span></div>
+<div class="role">Marketing &amp; Sales Reporting Team Lead <span class="role-date">| 04/2023 &ndash; 08/2024</span></div>
+<div class="role">M&amp;S Reporting Senior Specialist <span class="role-date">| 07/2022 &ndash; 03/2023</span></div>
+<div class="role">M&amp;S Reporting Specialist <span class="role-date">| 09/2021 &ndash; 06/2022</span></div>
+<div class="sublabel">Responsibilities</div>
+<ul>
+  <li>Directed global data integration and quality initiatives by leading product attribute management, optimizing data mapping processes, and implementing KPI-driven validation strategies &mdash; ensuring high data accuracy and enabling impactful business insights across markets and systems. Brought together front-end and back-end data management expertise to streamline data modeling, transformation and standardization processes.</li>
+  <li>Oversaw global product definition standards, providing master data cross-functional guidance and ensuring consistent knowledge transfer across teams to drive alignment, accuracy and best practices in data governance.</li>
+  <li>Integrated diverse data sources, including market data (shipments, distributor data, sell-in/sell-out via Azure Analysis Services), consumer insights (behavioral trends, switching analysis) and financial data (actuals and planning). Enabled end-to-end visibility by connecting product development in SAP ERP and financial processes in SAP S/4HANA, culminating in advanced analytics via SAP Analytics Cloud.</li>
+  <li>Led and inspired a high-performing team of 5 direct reports, driving engagement, fostering talent development and championing cross-functional collaboration to continuously enhance master data operations.</li>
+  <li>Built and maintained global reporting structures while driving operational excellence initiatives across M&amp;S, Strategic Insights, IT and Finance functions in Western and Eastern Europe, the Philippines and HQ in Geneva.</li>
+</ul>
+<div class="sublabel">Achievements</div>
+<ul>
+  <li>Implemented a new product definition system through the introduction of C-SKU (Commercial Stock Keeping Unit) across all JTI data platforms, enabling seamless data integration and both local and global reporting.</li>
+  <li>Successfully led the Global Harmonized Reporting Project under HQ Strategic Insights supervision &mdash; a 2-year initiative to develop complex Power BI solutions for 70+ markets, covering financial, retail audit and consumer data. Reports generate 450+ views daily and are actively used by over 300 stakeholders.</li>
+  <li>Automated 20+ manual Excel-based processes by developing Power BI composite models connected to a centralized Azure SQL data warehouse &mdash; delivering efficiency gains equivalent to 3 FTEs saved.</li>
+  <li>Contributed to 10+ cross-functional projects, supporting team development and achieving shared success through effective collaboration.</li>
+</ul>
+
+</div><!-- /page 2 -->
+
+<div class="page">
+<div class="company" style="margin-top:0;">Mercer Services Poland (GBS)</div>
+<div class="role">Knowledge Management Coordinator <span class="role-date">| 04/2020 &ndash; 08/2021</span></div>
+<div class="sublabel">Responsibilities</div>
+<ul>
+  <li>SharePoint intranet management: creation, standardization and maintenance of sites, communities and libraries.</li>
+  <li>Project management for specialty knowledge base projects across functions.</li>
+  <li>Content management and optimization, including web design improvements, formatting and generating internal website metrics, with Power BI reporting for SharePoint search optimization.</li>
+</ul>
+
+<div class="company">Accenture Operations Poland</div>
+<div class="role">Data Analyst <span class="role-date">| 01/2018 &ndash; 04/2020</span></div>
+<div class="sublabel">Responsibilities</div>
+<ul>
+  <li>Back-end customer support, including data review and adherence to client guidelines.</li>
+  <li>Timely and high-quality delivery under agreed standards.</li>
+  <li>Analyzed current events, generated improvement ideas and optimized workflows for a multinational client to enhance user experience.</li>
+</ul>
+<div class="sublabel">Achievement</div>
+<ul>
+  <li>Recognized as top "Innovator" of 2019, selected from 500+ employees, for multiple improvement ideas that impacted user experience, platform efficiency and the quality of support delivered to the client.</li>
+</ul>
+
+<div class="company">EMAG Warsaw</div>
+<div class="role">Junior Content Specialist <span class="role-date">| 09/2017 &ndash; 12/2017</span></div>
+<div class="sublabel">Responsibilities</div>
+<ul>
+  <li>Development of product pages with photos, descriptions and technical specifications (SEM improvements).</li>
+  <li>Standardization and validation of front-end product sites as part of regional projects.</li>
+  <li>Research, data categorization and sorting of products in the high-tech group, specializing in PC components, desktops/laptops and smartphones.</li>
+</ul>
+
+<div class="company">Own Start-up &ndash; Forest Lovers</div>
+<div class="role">Founder <span class="role-date">| 01/2016 &ndash; 05/2017</span></div>
+<ul>
+  <li>Established and ran a design-led floral business creating plant compositions known as "forests in a jar" &mdash; one of the first to introduce the trend in Poland. Managed the company end to end: product development, budget and fiscal management, and B2B client relationships including agencies and hospitality brands. Built the marketing channel to 8k+ social media followers.</li>
+</ul>
+
+<h2>Education</h2>
+<div class="edu-line"><b>Master of Management</b>, 2021 &ndash; 2023<br><span class="edu-school">Vistula University, Warsaw, Poland</span></div>
+<div class="edu-line"><b>Bachelor of International Relations</b>, 2014 &ndash; 2017<br><span class="edu-school">War Studies University, Warsaw, Poland</span></div>
+<div class="edu-line"><b>ERASMUS+, International Relations</b>, 2015 &ndash; 2016<br><span class="edu-school">National University of Public Service, Budapest, Hungary</span></div>
+
+<h2>Languages</h2>
+<p>English (C2) &middot; Polish (Native)</p>
+</div><!-- /page 3 -->
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BI &amp; Reporting — Adrian Skorupka</title>
+<meta name="description" content="Power BI report design and delivery — composite models on Azure SQL, DAX, row-level security, and ten worked FMCG dashboard examples.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="nav">
+    <a class="brand" href="index.html">
+      <div class="mark">AS</div>
+      <div><b>Adrian Skorupka</b><span>Master Data &amp; Business Intelligence</span></div>
+    </a>
+    <div class="links">
+      <a href="index.html">Overview</a>
+      <a href="bi-reporting.html" aria-current="page">BI &amp; Reporting</a>
+      <a href="master-data.html">Master Data</a>
+      <a href="ai-automation.html">AI &amp; Automation</a>
+      <a href="cv/adrian-skorupka-cv-ic.pdf">CV</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <h1>BI &amp; Reporting</h1>
+    <div class="role">Power BI · DAX · Azure SQL Data Warehouse · Azure Analysis Services · SAP Analytics Cloud</div>
+    <p class="lead">I design reports that survive contact with real stakeholders — where the measure
+      definitions hold across markets, the model refreshes without hand-holding, and an executive can
+      read the page in thirty seconds. Below: two delivery case studies, then ten worked dashboard
+      examples you can open and click through.</p>
+  </div>
+
+  <div class="section-label">Delivery case studies</div>
+  <div class="cases">
+
+    <article class="case" style="--track:var(--bi)">
+      <div class="where">Japan Tobacco International · Global Harmonized Reporting Project</div>
+      <h3>One reporting standard for 70+ markets, replacing a patchwork of local Excel</h3>
+      <dl>
+        <dt>Problem</dt>
+        <dd>Markets reported financial, retail-audit and consumer data in their own formats. HQ could not
+          compare them without manual rework, and every market maintained its own Excel chain.</dd>
+        <dt>Approach</dt>
+        <dd>Two-year programme under HQ Strategic Insights supervision. Built <b>Power BI composite models</b>
+          over a centralised <b>Azure SQL data warehouse</b>, with market data (shipments, distributor,
+          sell-in/sell-out via <b>Azure Analysis Services</b>), consumer insight and financial actuals and
+          planning connected into one semantic layer. Row-level security so each market sees its own scope.</dd>
+        <dt>Result</dt>
+        <dd><b>450+ report views per day</b>, actively used by <b>300+ stakeholders</b> across Western and
+          Eastern Europe, the Philippines and Geneva HQ. Local and global reporting from the same
+          definitions for the first time.</dd>
+      </dl>
+      <div class="stack"><span>Power BI</span><span>Composite models</span><span>DAX</span><span>Row-level security</span><span>Azure SQL DW</span><span>Azure Analysis Services</span><span>SAP Analytics Cloud</span></div>
+    </article>
+
+    <article class="case" style="--track:var(--bi)">
+      <div class="where">Japan Tobacco International · Reporting automation</div>
+      <h3>20+ manual Excel processes retired — 3 FTE of effort recovered</h3>
+      <dl>
+        <dt>Problem</dt>
+        <dd>Recurring reporting was assembled by hand every cycle: copy, paste, reconcile, re-send.
+          Slow, error-prone, and impossible to audit after the fact.</dd>
+        <dt>Approach</dt>
+        <dd>Traced each process back to its source, moved the logic into the warehouse and the model,
+          and replaced the manual step with a refreshing Power BI page. Where a process could not be
+          modelled away, it was standardised first, then automated.</dd>
+        <dt>Result</dt>
+        <dd>Over <b>20 processes automated</b>, delivering efficiency gains equivalent to <b>3 FTE saved</b>,
+          and a reporting layer the team could extend rather than rebuild.</dd>
+      </dl>
+      <div class="stack"><span>Power Query</span><span>Data modelling</span><span>ETL</span><span>Process mapping</span><span>LEAN</span></div>
+    </article>
+
+  </div>
+
+  <div class="section-label">Start here — capabilities reference</div>
+  <a class="featured" href="10-bi-capabilities.html">
+    <div class="shot"><img src="png/10-bi-capabilities.png" alt="BI Capabilities reference dashboard preview" loading="lazy" width="1280" height="720"></div>
+    <div class="copy">
+      <span class="tag">Reference · read this first</span>
+      <h2>Calculations, Filters &amp; Data Domains</h2>
+      <p>One-page reference of the measures (SOM, SOS, SOV, WAP, MAT…), slicer types and data
+        sources I build with across FMCG markets — the vocabulary and toolkit behind every
+        dashboard below. SAP master-data &amp; query t-codes I work with, and the data domains
+        (financial, shipments, distribution, consumer, pricing) each report draws on.</p>
+      <div class="skills"><span>Measures &amp; KPIs</span><span>Slicer types</span><span>Data domains</span><span>SAP t-codes</span><span>Tools &amp; stack</span></div>
+    </div>
+  </a>
+
+  <div class="section-label">Dashboards</div>
+  <div class="grid">
+    <a class="card" style="--card-accent:#1f5fd6" href="01-market-one-pager.html">
+      <div class="shot"><img src="png/01-market-one-pager.png" alt="Market One-Pager dashboard preview" loading="lazy" width="1280" height="720"></div>
+      <div class="meta">
+        <h3>Executive Market One-Pager</h3>
+        <p>Single-page exec summary: KPI cards, 12-month volume/share trend, brand mix and
+           regional share at a glance.</p>
+        <div class="skills"><span>KPI cards</span><span>Combo chart</span><span>Donut</span><span>Matrix</span></div>
+      </div>
+    </a>
+    <a class="card" style="--card-accent:#0f9d6b" href="02-performance-dashboard.html">
+      <div class="shot"><img src="png/02-performance-dashboard.png" alt="Category Performance dashboard preview" loading="lazy" width="1280" height="720"></div>
+      <div class="meta">
+        <h3>Category Performance Dashboard</h3>
+        <p>Multi-visual analytical page: volume vs share combo, price-segment mix, brand
+           evolution lines and regional breakdown.</p>
+        <div class="skills"><span>Stacked %</span><span>Multi-line</span><span>Slicers</span><span>Geo bars</span></div>
+      </div>
+    </a>
+    <a class="card" style="--card-accent:#6f8bff" href="03-weekly-pulse.html">
+      <div class="shot"><img src="png/03-weekly-pulse.png" alt="Weekly Pulse Tracker dashboard preview" loading="lazy" width="1280" height="720"></div>
+      <div class="meta">
+        <h3>Weekly Pulse Tracker (dark)</h3>
+        <p>Operational WoW tracker with sparkline KPIs, top-movers, and a RAG status matrix —
+           rendered in a dark theme.</p>
+        <div class="skills"><span>Dark mode</span><span>Sparklines</span><span>RAG status</span><span>Δ WoW</span></div>
+      </div>
+    </a>
+    <a class="card" style="--card-accent:#c2772a" href="04-share-of-market.html">
+      <div class="shot"><img src="png/04-share-of-market.png" alt="Share of Market dashboard preview" loading="lazy" width="1280" height="720"></div>
+      <div class="meta">
+        <h3>Share of Market (SOM) Report</h3>
+        <p>Competitive share view: brand SOM evolution, 100% manufacturer mix, variant
+           treemap and area SOM/SOS matrix.</p>
+        <div class="skills"><span>Treemap</span><span>100% stacked</span><span>SOM/SOS</span><span>Ranked</span></div>
+      </div>
+    </a>
+    <a class="card" style="--card-accent:#6a4ea3" href="05-regional-brand.html">
+      <div class="shot"><img src="png/05-regional-brand.png" alt="Regional Brand Performance dashboard preview" loading="lazy" width="1280" height="720"></div>
+      <div class="meta">
+        <h3>Regional Brand Performance (map)</h3>
+        <p>Geographic brand performance on a country map split into West / East / North / South
+           regions, plus ranking, trend, segment mix and competitor share.</p>
+        <div class="skills"><span>Map / bubbles</span><span>Geo SOM</span><span>Sidebar nav</span><span>Donut</span></div>
+      </div>
+    </a>
+    <a class="card" style="--card-accent:#0a9bc2" href="06-tables-filters.html">
+      <div class="shot"><img src="png/06-tables-filters.png" alt="SKU Explorer tables and filters dashboard preview" loading="lazy" width="1280" height="720"></div>
+      <div class="meta">
+        <h3>Tables &amp; Filters (SKU Explorer)</h3>
+        <p>KPI strip over a detailed SKU table with data bars and in-row sparklines,
+           plus a full slicer rail (dropdowns, multi-select, range).</p>
+        <div class="skills"><span>Data table</span><span>Data bars</span><span>Slicers</span><span>Sparklines</span></div>
+      </div>
+    </a>
+    <a class="card" style="--card-accent:#9b2f44" href="07-volume-finance.html">
+      <div class="shot"><img src="png/07-volume-finance.png" alt="Volume and Financial Performance dashboard preview" loading="lazy" width="1280" height="720"></div>
+      <div class="meta">
+        <h3>Volume &amp; Financial Performance</h3>
+        <p>Market size &amp; SOM, Gross Margin &amp; Operating Contribution trends, SOM vs Annual
+           Plan, pricing ladder and format mix.</p>
+        <div class="skills"><span>Combo</span><span>Vs Plan</span><span>Pricing</span><span>Finance KPIs</span></div>
+      </div>
+    </a>
+    <a class="card" style="--card-accent:#3b4c9a" href="08-market-overview.html">
+      <div class="shot"><img src="png/08-market-overview.png" alt="Market Performance Overview dashboard preview" loading="lazy" width="1280" height="720"></div>
+      <div class="meta">
+        <h3>Market Performance — Overview</h3>
+        <p>Management overview: volume &amp; SOM trend, manufacturer SOM lines, SOM by
+           price segment &amp; format, and Top Brands ranking.</p>
+        <div class="skills"><span>Multi-line</span><span>Stacked SOM</span><span>Sidebar nav</span><span>Ranked</span></div>
+      </div>
+    </a>
+    <a class="card" style="--card-accent:#34618f" href="09-monthly-summary.html">
+      <div class="shot"><img src="png/09-monthly-summary.png" alt="Market Performance Monthly Summary dashboard preview" loading="lazy" width="1280" height="720"></div>
+      <div class="meta">
+        <h3>Market Performance — Monthly Summary</h3>
+        <p>Executive monthly read-out: shipments column, SOM trend, a driver-focused
+           insights panel, segment donut and Top Brands.</p>
+        <div class="skills"><span>Column</span><span>Insights panel</span><span>Donut</span><span>KPIs</span></div>
+      </div>
+    </a>
+  </div>
+
+  <p class="note">Note: all figures are <b>synthetic</b> and every company, brand and market name is
+    <b>fictional</b> — each dashboard uses a different fictional company and product category. These
+    recreate report layouts I authored, with confidential data and identifiers removed.</p>
+
+  <footer>
+    <span>© 2026 Adrian Skorupka</span>
+    <div class="flinks">
+      <a href="index.html">Overview</a>
+      <a href="master-data.html">Master Data</a>
+      <a href="ai-automation.html">AI &amp; Automation</a>
+      <a href="mailto:adrian.skorupka@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/adrian-skorupka-26978718a" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
