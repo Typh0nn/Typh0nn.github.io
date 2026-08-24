@@ -3,11 +3,14 @@
    Shared across the hub (index) and the three track pages.
    ============================================================ */
 
+/* Single-accent discipline, after Bas Dohmen's report design: one hue carries
+   every emphasis, everything else is neutral. Colour marks meaning, never
+   decoration — so the numbers are what the eye lands on. */
 :root{
-  --bg:#0d1117; --surface:#161b22; --surface-2:#1c2129; --border:#30363d; --border-hover:#484f58;
-  --ink:#c9d1d9; --soft:#9198a1; --mute:#6e7681;
-  --accent:#58a6ff; --accent-soft:rgba(88,166,255,.12);
-  --bi:#58a6ff; --md:#26d3c6; --ai:#c08cff;
+  --bg:#0b0e16; --surface:#141824; --surface-2:#181d2b; --border:#252b3d; --border-hover:#3a4260;
+  --ink:#d7dbe7; --soft:#949cb3; --mute:#6a7288;
+  --accent:#7c6cff; --accent-soft:rgba(124,108,255,.13); --accent-line:rgba(124,108,255,.34);
+  --bi:var(--accent); --md:var(--accent); --ai:var(--accent);
   --good:#3fb950;
   --font:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",Arial,sans-serif;
   --mono:ui-monospace,"SF Mono",Consolas,"Liberation Mono",monospace;
@@ -50,15 +53,18 @@ img{max-width:100%}
 .btn.primary:hover{background:#79b8ff;border-color:#79b8ff}
 .btn svg{width:15px;height:15px;flex:none}
 
-/* ---- proof strip ---- */
-.proof{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:56px}
-.proof div{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px}
-.proof b{display:block;font-size:26px;color:#fff;font-weight:700;line-height:1.15;letter-spacing:-.5px}
-.proof span{display:block;font-size:12.5px;color:var(--soft);margin-top:6px;line-height:1.45}
+/* ---- proof strip: a Power BI KPI row, not a set of badges ---- */
+.proof{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:60px}
+.proof div{background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  padding:20px 22px;position:relative}
+.proof div::before{content:"";position:absolute;left:22px;top:-1px;width:22px;height:3px;
+  background:var(--accent);border-radius:0 0 2px 2px}
+.proof b{display:block;font-size:30px;color:#fff;font-weight:700;line-height:1.1;letter-spacing:-.7px}
+.proof span{display:block;font-size:12px;color:var(--soft);margin-top:9px;line-height:1.5}
 
 /* ---- section labels ---- */
-.section-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  color:var(--mute);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section-label{font-size:10.5px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;
+  color:var(--mute);margin-bottom:20px;display:flex;align-items:center;gap:14px}
 .section-label::after{content:"";flex:1;height:1px;background:var(--border)}
 
 /* ---- track cards (hub) ---- */
