@@ -58,13 +58,14 @@ body{
 a{color:inherit}
 ::selection{background:var(--accent);color:var(--paper)}
 
-/* faint ruled ground — a nod to a data grid, kept almost subliminal */
-body::before{
-  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
-  background-image:linear-gradient(var(--line) 1px,transparent 1px);
-  background-size:100% 104px; opacity:.34;
-  -webkit-mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent);
-          mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent);
+/* faint ruled ground — a nod to a data grid, kept almost subliminal.
+   Painted on <body> rather than a fixed masked layer: a full-viewport
+   masked pseudo-element forces the compositor to redraw it every frame,
+   which made the page stutter on scroll. */
+body{
+  background-image:linear-gradient(color-mix(in srgb,var(--line) 60%,transparent) 1px,transparent 1px);
+  background-size:100% 104px;
+  background-attachment:fixed;
 }
 .shell{position:relative;z-index:1;max-width:1220px;margin:0 auto;padding:0 32px}
 
@@ -117,8 +118,10 @@ body::before{
 .btn svg{width:15px;height:15px}
 
 /* ---------- the slicer ---------- */
+/* solid, not blurred: a second stacked backdrop-filter was measurably
+   expensive to composite alongside the sticky header */
 .slicer{position:sticky;top:66px;z-index:30;padding:16px 0;
-  background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(10px);
+  background:var(--paper);
   border-bottom:1px solid var(--line);margin-bottom:8px}
 .slicer .shell{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .slicer .label{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--ink-3);
