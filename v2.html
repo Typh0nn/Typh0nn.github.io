@@ -58,14 +58,14 @@ body{
 a{color:inherit}
 ::selection{background:var(--accent);color:var(--paper)}
 
-/* faint ruled ground — a nod to a data grid, kept almost subliminal.
-   Painted on <body> rather than a fixed masked layer: a full-viewport
-   masked pseudo-element forces the compositor to redraw it every frame,
-   which made the page stutter on scroll. */
+/* Faint ruled ground — a nod to ledger paper, kept almost subliminal.
+   Deliberately NOT background-attachment:fixed and not a fixed masked
+   pseudo-element: both force a full-viewport repaint on every scroll frame
+   and made the page stutter badly. Letting the rules scroll with the
+   content costs nothing and reads more like paper anyway. */
 body{
   background-image:linear-gradient(color-mix(in srgb,var(--line) 60%,transparent) 1px,transparent 1px);
   background-size:100% 104px;
-  background-attachment:fixed;
 }
 .shell{position:relative;z-index:1;max-width:1220px;margin:0 auto;padding:0 32px}
 
