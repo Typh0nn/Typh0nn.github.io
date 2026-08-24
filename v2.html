@@ -372,9 +372,10 @@ footer a:hover{color:var(--accent)}
             <li>Led the regional Customer Service Master Data team across <b>Iberia, the Canary Islands, Benelux and Italy</b>, reporting directly to the <b>VP Supply Chain Europe</b>.</li>
             <li>Conducted advanced process mapping and standardisation for <b>over 300 services</b> the team provided, and harmonised four markets' workflows into a single source of truth.</li>
             <li>Implemented automated data validation scripts for the BNL and Southern Europe markets, ensuring <b>100% data readiness</b> before the SAP-to-Databricks migration.</li>
+            <li>Led the team that built and modernised the <b>Power BI dashboards Customer Service ran on</b> — PIPO (phase-in / phase-out) tracking and service KPIs, sourced straight from the SAP modules in my scope: customer and material master, pricing conditions, and order-to-cash data covering sales orders, deliveries, backorders, returns and stock.</li>
             <li>Partnered with IT on Databricks to build a unified <b>"Data Brain"</b> and agentic AI frameworks that reduced manual effort in departmental reporting.</li>
           </ul>
-          <div class="tags"><span class="tag">Master data governance</span><span class="tag">SAP</span><span class="tag">Databricks</span><span class="tag">Process mapping</span><span class="tag">LEAN</span><span class="tag">Team leadership</span></div>
+          <div class="tags"><span class="tag">Power BI</span><span class="tag">Master data governance</span><span class="tag">SAP</span><span class="tag">Databricks</span><span class="tag">Process mapping</span><span class="tag">LEAN</span><span class="tag">Team leadership</span></div>
         </article>
 
         <article class="role" data-tags="md bi sap lead fmcg ai">
@@ -487,6 +488,49 @@ footer a:hover{color:var(--accent)}
             earn it</span> — the same instinct as retiring a manual report.</div>
         </article>
 
+      </div>
+
+      <div class="sec-head" style="margin-top:56px">
+        <span class="sec-num">03b</span>
+        <h2>What the system is actually for</h2>
+        <p>Context for the AI work above — the goal it is built against, and the design
+          positions I have committed to.</p>
+      </div>
+
+      <div class="work">
+        <article class="card" data-tags="ai"><div class="rule"></div>
+          <div class="where">The goal</div>
+          <h3>Closed loops, not a manual for me to follow</h3>
+          <p>I am building a system that takes a business blueprint and <b>executes it end to
+            end</b> — research, build, publish, measure — with me stimulating and approving rather
+            than operating. The failure mode I am designing against is the obvious one: a system
+            that produces beautiful plans a human then has to carry out by hand. If a loop does not
+            close without me, it is not finished.</p>
+          <p>It runs in phases — strategy and idea selection, then execution of individual business
+            projects, then scaling what works. It is ongoing personal work, not a shipped product,
+            and I would rather describe it that way than oversell it.</p>
+          <div class="out">The test: <span>does the loop close without a human in the middle?</span></div>
+        </article>
+
+        <article class="card" data-tags="ai bi"><div class="rule"></div>
+          <div class="where">The design positions</div>
+          <h3>Four choices I would defend in a review</h3>
+          <p><b>Workflow-first, explicitly anti-AutoGPT.</b> Deterministic workflow where the steps
+            are known; a model only where judgement is genuinely required. Free-running agent loops
+            are a liability, not an architecture. State is written by a <b>single writer</b> so two
+            agents can never race the same record — the master-data instinct, applied to agents.</p>
+          <p><b>Cost is a design constraint, not an afterthought.</b> Model choice is configuration
+            per role, never hard-coded; spend is tracked per call against enforced budgets. Cheap
+            and local by default.</p>
+          <p><b>Buy the commodity, build the core.</b> The execution layer is n8n, self-hosted,
+            because a proven engine beats a bespoke one; the custom code is only where the actual
+            intellectual property lives.</p>
+          <p><b>A human on the high-stakes call.</b> Approval gates before anything irreversible or
+            outward-facing, with an LLM-as-judge handling quality control on everything below that
+            line.</p>
+          <div class="out">Every one of these is <span>the same reflex as governing master
+            data</span> — decide the standard once, then make the system honour it.</div>
+        </article>
       </div>
     </div>
   </section>
