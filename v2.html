@@ -141,10 +141,7 @@ body{
    the negation form proved fragile to interact with the reveal animation,
    and an explicit class is trivial to reason about. */
 [data-tags]{transition:opacity .34s ease, filter .34s ease}
-/* `body` prefix is deliberate: .rise.in sets opacity:1 for the scroll reveal
-   at equal specificity and later in the file, so without it the reveal wins
-   and nothing ever dims. */
-body [data-tags].dim{opacity:var(--dim);filter:saturate(.25)}
+[data-tags].dim{opacity:var(--dim);filter:saturate(.25)}
 
 /* ---------- section furniture ---------- */
 section{padding:76px 0;scroll-margin-top:130px}
@@ -247,10 +244,6 @@ footer a{color:var(--ink-3);text-decoration:none}
 footer a:hover{color:var(--accent)}
 .note{font-size:12.5px;color:var(--ink-3);line-height:1.65;max-width:78ch;margin-top:26px}
 
-/* ---------- reveal ---------- */
-.rise{opacity:0;transform:translateY(14px)}
-.rise.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
-
 @media (max-width:1000px){
   .measures{grid-template-columns:repeat(2,1fr)}
   .work,.caps,.quotes,.gallery{grid-template-columns:1fr}
@@ -266,7 +259,6 @@ footer a:hover{color:var(--accent)}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-  .rise{opacity:1;transform:none}
 }
 </style>
 </head>
@@ -294,14 +286,14 @@ footer a:hover{color:var(--accent)}
 
   <div class="hero">
     <div class="shell">
-      <div class="eyebrow rise">Master Data Manager · BI Lead · Warsaw</div>
-      <h1 class="rise">Somebody has to decide what the number <em>actually means</em>.</h1>
-      <p class="lead rise">For eight years that has been my job — in global FMCG, across
+      <div class="eyebrow">Master Data Manager · BI Lead · Warsaw</div>
+      <h1>Somebody has to decide what the number <em>actually means</em>.</h1>
+      <p class="lead">For eight years that has been my job — in global FMCG, across
         <b>70+ markets</b>, in SAP and Power BI. I agree what a product <em>is</em> across systems,
         write the validation that stops bad records at the door, and build the reporting layer that
         an executive can read in thirty seconds. Most recently I led a regional master data team
         across four European markets, reporting to the <b>VP Supply Chain Europe</b>.</p>
-      <div class="actions rise">
+      <div class="actions">
         <a class="btn primary" href="mailto:adrian.skorupka@gmail.com">
           <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1.75 2A1.75 1.75 0 0 0 0 3.75v.736a.75.75 0 0 0 .015.15l7.51 4.297a.75.75 0 0 0 .75 0l7.51-4.297A.75.75 0 0 0 16 4.486V3.75A1.75 1.75 0 0 0 14.25 2H1.75ZM16 6.06l-6.75 3.858a2.25 2.25 0 0 1-2.5 0L0 6.06V12.25C0 13.216.784 14 1.75 14h12.5A1.75 1.75 0 0 0 16 12.25V6.06Z"/></svg>
           Get in touch</a>
@@ -331,13 +323,13 @@ footer a:hover{color:var(--accent)}
 
   <section id="evidence">
     <div class="shell">
-      <div class="sec-head rise">
+      <div class="sec-head">
         <span class="sec-num">01</span>
         <h2>The numbers behind it</h2>
         <p>Every figure below is on my CV, in my line manager's reference letter, or in a JTI
           performance review — so all of it is attributable.</p>
       </div>
-      <div class="measures rise">
+      <div class="measures">
         <div class="measure" data-tags="bi fmcg"><div class="v">70+</div><div class="k">markets covered by the global Power&nbsp;BI programme I led</div></div>
         <div class="measure" data-tags="bi fmcg"><div class="v">450<span style="font-size:.55em">/day</span></div><div class="k">report views, used by 300+ stakeholders</div></div>
         <div class="measure" data-tags="bi ai"><div class="v">98%</div><div class="k">cut in report loading time after I redesigned the Harmonized Report</div></div>
@@ -352,7 +344,7 @@ footer a:hover{color:var(--accent)}
 
   <section id="experience">
     <div class="shell">
-      <div class="sec-head rise">
+      <div class="sec-head">
         <span class="sec-num">02</span>
         <h2>Where I have done it</h2>
         <p>Eight years, four employers, one recurring problem: getting a large organisation to
@@ -360,7 +352,7 @@ footer a:hover{color:var(--accent)}
       </div>
       <div class="lineage">
 
-        <article class="role rise" data-tags="ai bi md">
+        <article class="role" data-tags="ai bi md">
           <div class="when">04/2026 — Present</div>
           <h3>Data &amp; AI Consultant</h3>
           <div class="org">Independent Consulting / Freelance</div>
@@ -372,7 +364,7 @@ footer a:hover{color:var(--accent)}
           <div class="tags"><span class="tag">Python</span><span class="tag">LangGraph</span><span class="tag">Pydantic</span><span class="tag">FastAPI</span><span class="tag">Playwright</span><span class="tag">Cloudflare</span><span class="tag">Power BI</span></div>
         </article>
 
-        <article class="role rise" data-tags="md sap lead ai fmcg">
+        <article class="role" data-tags="md sap lead ai fmcg">
           <div class="when">11/2025 — 04/2026</div>
           <h3>Customer Service Master Data Manager</h3>
           <div class="org">Coty Inc., Spain</div>
@@ -385,7 +377,7 @@ footer a:hover{color:var(--accent)}
           <div class="tags"><span class="tag">Master data governance</span><span class="tag">SAP</span><span class="tag">Databricks</span><span class="tag">Process mapping</span><span class="tag">LEAN</span><span class="tag">Team leadership</span></div>
         </article>
 
-        <article class="role rise" data-tags="md bi sap lead fmcg ai">
+        <article class="role" data-tags="md bi sap lead fmcg ai">
           <div class="when">09/2021 — 10/2025</div>
           <h3>Master Data Manager</h3>
           <div class="org">Japan Tobacco International</div>
@@ -401,7 +393,7 @@ footer a:hover{color:var(--accent)}
           <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Composite models</span><span class="tag">Row-level security</span><span class="tag">Azure SQL DW</span><span class="tag">Azure Analysis Services</span><span class="tag">SAP S/4HANA</span><span class="tag">SAP Analytics Cloud</span><span class="tag">Team leadership</span></div>
         </article>
 
-        <article class="role rise" data-tags="bi">
+        <article class="role" data-tags="bi">
           <div class="when">04/2020 — 08/2021</div>
           <h3>Knowledge Management Coordinator</h3>
           <div class="org">Mercer Services Poland (GBS)</div>
@@ -412,7 +404,7 @@ footer a:hover{color:var(--accent)}
           <div class="tags"><span class="tag">SharePoint</span><span class="tag">Power BI</span><span class="tag">Knowledge management</span></div>
         </article>
 
-        <article class="role rise" data-tags="bi">
+        <article class="role" data-tags="bi">
           <div class="when">01/2018 — 04/2020</div>
           <h3>Data Analyst</h3>
           <div class="org">Accenture Operations Poland</div>
@@ -423,7 +415,7 @@ footer a:hover{color:var(--accent)}
           <div class="tags"><span class="tag">Data analysis</span><span class="tag">Process improvement</span></div>
         </article>
 
-        <article class="role rise" data-tags="fmcg lead">
+        <article class="role" data-tags="fmcg lead">
           <div class="when">2016 — 2017</div>
           <h3>Founder — Forest Lovers</h3>
           <div class="org">Own start-up</div>
@@ -437,14 +429,14 @@ footer a:hover{color:var(--accent)}
 
   <section id="work">
     <div class="shell">
-      <div class="sec-head rise">
+      <div class="sec-head">
         <span class="sec-num">03</span>
         <h2>Four problems worth explaining</h2>
         <p>Problem, what I actually did, and what changed as a result.</p>
       </div>
       <div class="work">
 
-        <article class="card rise" data-tags="md sap fmcg"><div class="rule"></div>
+        <article class="card" data-tags="md sap fmcg"><div class="rule"></div>
           <div class="where">Japan Tobacco International</div>
           <h3>C-SKU: giving every platform one definition of a product</h3>
           <p>Product identity differed by system. What finance called a product, supply chain and
@@ -457,7 +449,7 @@ footer a:hover{color:var(--accent)}
             foundation that made 70+ market reporting possible at all.</div>
         </article>
 
-        <article class="card rise" data-tags="bi ai fmcg"><div class="rule"></div>
+        <article class="card" data-tags="bi ai fmcg"><div class="rule"></div>
           <div class="where">JTI · RoMoBu cluster</div>
           <h3>From 18 spreadsheets to 30+ reports, on a doubled portfolio</h3>
           <p>Reporting was assembled by hand each cycle, the Nielsen Local source was being retired
@@ -469,7 +461,7 @@ footer a:hover{color:var(--accent)}
             with twice the portfolio.</div>
         </article>
 
-        <article class="card rise" data-tags="md lead sap"><div class="rule"></div>
+        <article class="card" data-tags="md lead sap"><div class="rule"></div>
           <div class="where">Coty Inc.</div>
           <h3>Four markets, four ways of working — reduced to one</h3>
           <p>The regional Customer Service master data function spanned Iberia, the Canary Islands,
@@ -482,7 +474,7 @@ footer a:hover{color:var(--accent)}
             check rather than a one-off review.</div>
         </article>
 
-        <article class="card rise" data-tags="ai bi"><div class="rule"></div>
+        <article class="card" data-tags="ai bi"><div class="rule"></div>
           <div class="where">Independent</div>
           <h3>Agents are easy. The controls around them are the work.</h3>
           <p>Getting a demo out of an LLM is not the problem. What happens when a call times out,
@@ -501,14 +493,14 @@ footer a:hover{color:var(--accent)}
 
   <section id="craft">
     <div class="shell">
-      <div class="sec-head rise">
+      <div class="sec-head">
         <span class="sec-num">04</span>
         <h2>What I am, and what I am not</h2>
         <p>Grouped by how deep I actually go. I would rather you know before the technical
           interview than during it.</p>
       </div>
       <div class="caps">
-        <div class="cap rise" data-tags="bi md sap">
+        <div class="cap" data-tags="bi md sap">
           <h3>Specialist — this is my craft</h3>
           <div class="sub">Daily, in depth, for years.</div>
           <div class="tags">
@@ -521,7 +513,7 @@ footer a:hover{color:var(--accent)}
             <span class="tag">Advanced Excel</span><span class="tag">SharePoint</span>
           </div>
         </div>
-        <div class="cap rise" data-tags="bi">
+        <div class="cap" data-tags="bi">
           <h3>Working knowledge</h3>
           <div class="sub">I use these confidently. I do not present myself as the specialist.</div>
           <div class="tags">
@@ -529,7 +521,7 @@ footer a:hover{color:var(--accent)}
             <span class="tag">Power Automate</span><span class="tag">MS Access</span><span class="tag">ETL</span>
           </div>
         </div>
-        <div class="cap rise" data-tags="ai">
+        <div class="cap" data-tags="ai">
           <h3>Built with, outside BI</h3>
           <div class="sub">Current hands-on work rather than a certificate.</div>
           <div class="tags">
@@ -542,7 +534,7 @@ footer a:hover{color:var(--accent)}
         </div>
       </div>
 
-      <div class="quotes rise" style="margin-top:20px">
+      <div class="quotes" style="margin-top:20px">
         <div class="quote" data-tags="bi lead">
           <div class="mark">“</div>
           <p>Reporting preparation times were reduced by up to 80–90%, critical processes were
@@ -567,13 +559,13 @@ footer a:hover{color:var(--accent)}
 
   <section id="reports">
     <div class="shell">
-      <div class="sec-head rise">
+      <div class="sec-head">
         <span class="sec-num">05</span>
         <h2>Report design, in the open</h2>
         <p>Ten worked Power BI examples you can open and click through, plus the measure and
           data-domain reference behind them.</p>
       </div>
-      <div class="gallery rise">
+      <div class="gallery">
         <a class="shot" href="10-bi-capabilities.html">
           <img src="png/10-bi-capabilities.png" alt="Capabilities reference" loading="lazy" width="1280" height="720">
           <div class="cap-t"><b>Calculations, Filters &amp; Data Domains</b><span>Start here — the measures, slicer types, data domains and SAP t-codes behind every report</span></div>
@@ -676,18 +668,6 @@ footer a:hover{color:var(--accent)}
     apply();
   });
 
-  /* ---- quiet reveal ---- */
-  if(!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(entries){
-      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    },{rootMargin:'0px 0px -8% 0px',threshold:.06});
-    document.querySelectorAll('.rise').forEach(function(el,i){
-      el.style.transitionDelay=(Math.min(i,6)*38)+'ms';
-      io.observe(el);
-    });
-  } else {
-    document.querySelectorAll('.rise').forEach(function(el){el.classList.add('in')});
-  }
 })();
 </script>
 </body>
