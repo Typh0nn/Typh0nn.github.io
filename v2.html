@@ -137,10 +137,14 @@ body{
 .chip.clear{border-style:dashed;color:var(--ink-3)}
 .filter-note{font-size:12.5px;color:var(--ink-3);margin-left:auto;white-space:nowrap}
 
-/* dimming driven by the slicer */
+/* Dimming is driven by an explicit .dim class rather than :not(.match):
+   the negation form proved fragile to interact with the reveal animation,
+   and an explicit class is trivial to reason about. */
 [data-tags]{transition:opacity .34s ease, filter .34s ease}
-body.filtering [data-tags]:not(.match){opacity:var(--dim);filter:saturate(.25)}
-body.filtering [data-tags].match{opacity:1}
+/* `body` prefix is deliberate: .rise.in sets opacity:1 for the scroll reveal
+   at equal specificity and later in the file, so without it the reveal wins
+   and nothing ever dims. */
+body [data-tags].dim{opacity:var(--dim);filter:saturate(.25)}
 
 /* ---------- section furniture ---------- */
 section{padding:76px 0;scroll-margin-top:130px}
@@ -651,6 +655,7 @@ footer a:hover{color:var(--accent)}
       var tags=(el.getAttribute('data-tags')||'').split(/\s+/);
       var hit=!on || tags.some(function(t){return active.has(t)});
       el.classList.toggle('match',hit && on);
+      el.classList.toggle('dim', on && !hit);
       if(hit) shown++;
     });
     if(!on){ note.textContent='Like a slicer — pick what you care about'; }
