@@ -279,8 +279,10 @@ a.shot{display:block;text-decoration:none;border:1px solid var(--line);border-ra
   overflow:hidden;background:var(--surface);box-shadow:var(--shadow);
   transition:transform .18s,box-shadow .18s,border-color .18s}
 a.shot:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift);border-color:var(--accent)}
-a.shot img{width:100%;aspect-ratio:1280/720;object-fit:cover;object-position:top;display:block;
-  border-bottom:1px solid var(--line)}
+/* No object-fit:cover here. The sources are complete 1280x720 dashboards and
+   the point of the thumbnail is to show the WHOLE report, not a crop of its
+   top-left corner. Natural ratio, full width. */
+a.shot img{width:100%;height:auto;display:block;border-bottom:1px solid var(--line)}
 a.shot .cap-t{padding:15px 17px 17px}
 a.shot .cap-t b{display:block;font-size:14.5px;font-weight:600}
 a.shot .cap-t span{display:block;font-size:12.5px;color:var(--ink-3);margin-top:4px;line-height:1.5}
