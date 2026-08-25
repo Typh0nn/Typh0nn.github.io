@@ -272,9 +272,9 @@ a.showcase:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift);border
   color:var(--ink-3);margin-bottom:18px;display:flex;align-items:center;gap:14px}
 .section-sub::after{content:"";flex:1;height:1px;background:var(--line)}
 
-/* two columns, not three: the source images are 16:9 dashboards and need
-   the width to stay legible */
-.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+/* Three across, as on the original site: the capabilities showcase above is
+   the large one, these sit under it as smaller, uniform previews. */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 a.shot{display:block;text-decoration:none;border:1px solid var(--line);border-radius:var(--r);
   overflow:hidden;background:var(--surface);box-shadow:var(--shadow);
   transition:transform .18s,box-shadow .18s,border-color .18s}
