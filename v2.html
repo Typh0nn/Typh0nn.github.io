@@ -83,6 +83,9 @@ body{
 .top nav{display:flex;gap:4px;align-items:center}
 .top nav a{font-size:13.5px;color:var(--ink-2);text-decoration:none;padding:7px 12px;border-radius:8px}
 .top nav a:hover{color:var(--ink);background:var(--surface-2)}
+.top nav a.hot{color:var(--accent);font-weight:600}
+.top nav a.hot::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--accent);margin-right:7px;vertical-align:middle}
 .iconbtn{width:36px;height:36px;border-radius:9px;border:1px solid var(--line);
   background:var(--surface);color:var(--ink-2);display:grid;place-items:center;cursor:pointer;
   transition:border-color .15s,color .15s}
@@ -124,8 +127,11 @@ body{
   background:var(--paper);
   border-bottom:1px solid var(--line);margin-bottom:8px}
 .slicer .shell{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.slicer .label{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--ink-3);
-  font-weight:600;white-space:nowrap}
+/* accent, not grey: this label is the one instruction on the page and people
+   miss the slicer entirely if it reads as furniture */
+.slicer .label{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--accent);
+  font-weight:700;white-space:nowrap;display:inline-flex;align-items:center;gap:8px}
+.slicer .label::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
 .chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .chip{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--ink-2);cursor:pointer;
   padding:7px 15px;border-radius:999px;border:1px solid var(--line);background:var(--surface);
@@ -204,6 +210,28 @@ section{padding:76px 0;scroll-margin-top:130px}
   font-size:14px;color:var(--ink);font-weight:600}
 .card .out span{color:var(--accent)}
 
+/* ---------- feature banner ---------- */
+a.feature{display:grid;grid-template-columns:1.35fr .65fr;gap:0;margin-top:44px;
+  text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);
+  transition:transform .18s,box-shadow .18s,border-color .18s}
+a.feature:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift);border-color:var(--accent)}
+.feature-copy{padding:32px 34px 30px}
+.feature-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1.2px;
+  text-transform:uppercase;color:var(--accent);background:var(--accent-soft);
+  border:1px solid var(--accent);border-radius:999px;padding:4px 12px;margin-bottom:14px}
+.feature-copy h3{font-family:var(--display);font-weight:600;font-size:23px;letter-spacing:-.3px;
+  margin-bottom:11px}
+.feature-copy p{font-size:14.8px;color:var(--ink-2);line-height:1.7;max-width:56ch}
+.feature-go{display:inline-block;margin-top:16px;font-size:13.5px;font-weight:600;color:var(--accent)}
+.feature-art{background:var(--surface-2);border-left:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;padding:24px}
+.feature-art svg{width:100%;height:auto;max-width:300px}
+.fbox{fill:var(--surface);stroke:var(--line-2)}
+.fbox-a{fill:var(--accent-soft);stroke:var(--accent)}
+.fbox-t{fill:var(--surface);stroke:var(--line-2)}
+.fline{stroke:var(--line-2);stroke-width:1.5;fill:none}
+
 /* ---------- capability columns ---------- */
 .caps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .cap{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px 26px 24px}
@@ -220,7 +248,9 @@ section{padding:76px 0;scroll-margin-top:130px}
 .quote .who b{color:var(--ink);font-weight:600;display:block}
 
 /* ---------- dashboards ---------- */
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+/* two columns, not three: the source images are 16:9 dashboards and need
+   the width to stay legible */
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
 a.shot{display:block;text-decoration:none;border:1px solid var(--line);border-radius:var(--r);
   overflow:hidden;background:var(--surface);box-shadow:var(--shadow);
   transition:transform .18s,box-shadow .18s,border-color .18s}
@@ -247,6 +277,8 @@ footer a:hover{color:var(--accent)}
 @media (max-width:1000px){
   .measures{grid-template-columns:repeat(2,1fr)}
   .work,.caps,.quotes,.gallery{grid-template-columns:1fr}
+  a.feature{grid-template-columns:1fr}
+  .feature-art{border-left:none;border-top:1px solid var(--line)}
   .sec-head p{margin-left:0}
 }
 @media (max-width:700px){
@@ -271,6 +303,7 @@ footer a:hover{color:var(--accent)}
       <a href="#evidence">Numbers</a>
       <a href="#experience">Experience</a>
       <a href="#work">Work</a>
+      <a href="ai-system.html" class="hot">Multi-agent system</a>
       <a href="#craft">Craft</a>
       <a href="#reports">Reports</a>
       <a href="#contact">Contact</a>
@@ -490,48 +523,25 @@ footer a:hover{color:var(--accent)}
 
       </div>
 
-      <div class="sec-head" style="margin-top:56px">
-        <span class="sec-num">03b</span>
-        <h2>What the system is actually for</h2>
-        <p>Context for the AI work above — the goal it is built against, and the design
-          positions I have committed to.</p>
-      </div>
-
-      <div class="work">
-        <article class="card" data-tags="ai"><div class="rule"></div>
-          <div class="where">The goal</div>
-          <h3>Closed loops, not a manual for me to follow</h3>
-          <p>I am building a system that takes a business blueprint and <b>executes it end to
-            end</b> — research, build, publish, measure — with me stimulating and approving rather
-            than operating. The failure mode I am designing against is the obvious one: a system
-            that produces beautiful plans a human then has to carry out by hand. If a loop does not
-            close without me, it is not finished.</p>
-          <p>It runs in phases — strategy and idea selection, then execution of individual business
-            projects, then scaling what works. It is ongoing personal work, not a shipped product,
-            and I would rather describe it that way than oversell it.</p>
-          <div class="out">The test: <span>does the loop close without a human in the middle?</span></div>
-        </article>
-
-        <article class="card" data-tags="ai bi"><div class="rule"></div>
-          <div class="where">The design positions</div>
-          <h3>Four choices I would defend in a review</h3>
-          <p><b>Workflow-first, explicitly anti-AutoGPT.</b> Deterministic workflow where the steps
-            are known; a model only where judgement is genuinely required. Free-running agent loops
-            are a liability, not an architecture. State is written by a <b>single writer</b> so two
-            agents can never race the same record — the master-data instinct, applied to agents.</p>
-          <p><b>Cost is a design constraint, not an afterthought.</b> Model choice is configuration
-            per role, never hard-coded; spend is tracked per call against enforced budgets. Cheap
-            and local by default.</p>
-          <p><b>Buy the commodity, build the core.</b> The execution layer is n8n, self-hosted,
-            because a proven engine beats a bespoke one; the custom code is only where the actual
-            intellectual property lives.</p>
-          <p><b>A human on the high-stakes call.</b> Approval gates before anything irreversible or
-            outward-facing, with an LLM-as-judge handling quality control on everything below that
-            line.</p>
-          <div class="out">Every one of these is <span>the same reflex as governing master
-            data</span> — decide the standard once, then make the system honour it.</div>
-        </article>
-      </div>
+      <a class="feature" href="ai-system.html">
+        <div class="feature-copy">
+          <span class="feature-tag">Deep dive</span>
+          <h3>The multi-agent AI system, in full</h3>
+          <p>The architecture, the closed-loop goal it is built against, the four design positions
+            behind it, and an honest ledger of what it has actually solved — with diagrams.</p>
+          <span class="feature-go">Open the write-up &rarr;</span>
+        </div>
+        <div class="feature-art" aria-hidden="true">
+          <svg viewBox="0 0 300 170">
+            <rect x="8" y="10" width="284" height="26" rx="7" class="fbox-a"/>
+            <rect x="8" y="48" width="284" height="26" rx="7" class="fbox-t"/>
+            <rect x="8" y="86" width="136" height="26" rx="7" class="fbox"/>
+            <rect x="156" y="86" width="136" height="26" rx="7" class="fbox"/>
+            <rect x="8" y="124" width="284" height="26" rx="7" class="fbox-t"/>
+            <path class="fline" d="M150 36 L150 48 M76 74 L76 86 M224 74 L224 86 M150 112 L150 124"/>
+          </svg>
+        </div>
+      </a>
     </div>
   </section>
 
@@ -610,29 +620,29 @@ footer a:hover{color:var(--accent)}
           data-domain reference behind them.</p>
       </div>
       <div class="gallery">
-        <a class="shot" href="10-bi-capabilities.html">
-          <img src="png/10-bi-capabilities.png" alt="Capabilities reference" loading="lazy" width="1280" height="720">
-          <div class="cap-t"><b>Calculations, Filters &amp; Data Domains</b><span>Start here — the measures, slicer types, data domains and SAP t-codes behind every report</span></div>
+        <a class="shot" href="03-weekly-pulse.html">
+          <img src="png/03-weekly-pulse.png" alt="Weekly Pulse Tracker dashboard" loading="lazy" width="1280" height="720">
+          <div class="cap-t"><b>Weekly Pulse Tracker</b><span>Operational week-on-week tracker: sparkline KPIs, top movers and a RAG status matrix, in a dark theme</span></div>
         </a>
-        <a class="shot" href="01-market-one-pager.html">
-          <img src="png/01-market-one-pager.png" alt="Executive market one-pager" loading="lazy" width="1280" height="720">
-          <div class="cap-t"><b>Executive Market One-Pager</b><span>KPI cards, 12-month volume and share trend, brand mix, regional share</span></div>
+        <a class="shot" href="09-monthly-summary.html">
+          <img src="png/09-monthly-summary.png" alt="Market Performance - Monthly Summary dashboard" loading="lazy" width="1280" height="720">
+          <div class="cap-t"><b>Market Performance &mdash; Monthly Summary</b><span>Executive monthly read-out: shipments, SOM trend, a driver-focused insights panel, segment donut and top brands</span></div>
         </a>
-        <a class="shot" href="04-share-of-market.html">
-          <img src="png/04-share-of-market.png" alt="Share of market report" loading="lazy" width="1280" height="720">
-          <div class="cap-t"><b>Share of Market</b><span>Brand SOM evolution, 100% manufacturer mix, variant treemap, area SOM/SOS</span></div>
+        <a class="shot" href="08-market-overview.html">
+          <img src="png/08-market-overview.png" alt="Market Performance - Overview dashboard" loading="lazy" width="1280" height="720">
+          <div class="cap-t"><b>Market Performance &mdash; Overview</b><span>Management overview: volume and SOM trend, manufacturer SOM lines, SOM by price segment and format, ranked top brands</span></div>
         </a>
-        <a class="shot" href="05-regional-brand.html">
-          <img src="png/05-regional-brand.png" alt="Regional brand performance" loading="lazy" width="1280" height="720">
-          <div class="cap-t"><b>Regional Brand Performance</b><span>Geographic performance by region, ranking, trend, competitor share</span></div>
+        <a class="shot" href="02-performance-dashboard.html">
+          <img src="png/02-performance-dashboard.png" alt="Category Performance Dashboard dashboard" loading="lazy" width="1280" height="720">
+          <div class="cap-t"><b>Category Performance Dashboard</b><span>Multi-visual analytical page: volume vs share combo, price-segment mix, brand evolution lines, regional breakdown</span></div>
         </a>
         <a class="shot" href="06-tables-filters.html">
-          <img src="png/06-tables-filters.png" alt="SKU explorer" loading="lazy" width="1280" height="720">
-          <div class="cap-t"><b>Tables &amp; Filters — SKU Explorer</b><span>Detailed SKU table with data bars, in-row sparklines and a full slicer rail</span></div>
+          <img src="png/06-tables-filters.png" alt="Tables - Filters - SKU Explorer dashboard" loading="lazy" width="1280" height="720">
+          <div class="cap-t"><b>Tables &amp; Filters &mdash; SKU Explorer</b><span>Detailed SKU table with data bars and in-row sparklines, over a full slicer rail</span></div>
         </a>
         <a class="shot" href="07-volume-finance.html">
-          <img src="png/07-volume-finance.png" alt="Volume and financial performance" loading="lazy" width="1280" height="720">
-          <div class="cap-t"><b>Volume &amp; Financial Performance</b><span>Market size, gross margin, SOM vs annual plan, pricing ladder, format mix</span></div>
+          <img src="png/07-volume-finance.png" alt="Volume - Financial Performance dashboard" loading="lazy" width="1280" height="720">
+          <div class="cap-t"><b>Volume &amp; Financial Performance</b><span>Market size and SOM, gross margin and operating contribution, SOM vs annual plan, pricing ladder and format mix</span></div>
         </a>
       </div>
       <p class="note">All ten dashboards are linked from the
