@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Multi-Agent AI System — Adrian Skorupka</title>
-<meta name="description" content="A multi-agent AI system that takes a business blueprint and executes it end to end — the concept, the goal, and what it has actually solved so far.">
+<meta name="description" content="A multi-agent AI system built as an LLM OS — Athenian debate for planning, Roman hierarchy for execution, a compiled knowledge base, and a portfolio of projects running on one orchestration bus.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -19,6 +19,7 @@
   --shadow-lift:0 2px 4px rgba(18,21,27,.05), 0 18px 44px rgba(18,21,27,.11);
   --display:"Fraunces",Georgia,"Times New Roman",serif;
   --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Consolas,"Liberation Mono",monospace;
   --r:14px;
 }
 @media (prefers-color-scheme:dark){
@@ -96,17 +97,20 @@ section{padding:66px 0;scroll-margin-top:90px}
 .fig figcaption{margin-top:20px;padding-top:16px;border-top:1px dashed var(--line);
   font-size:13.5px;color:var(--ink-3);line-height:1.65}
 .fig figcaption b{color:var(--ink-2);font-weight:600}
+.fig + .fig{margin-top:22px}
 
-/* SVG typography */
 .s-t{font:600 13px var(--sans);fill:var(--ink)}
 .s-s{font:500 11px var(--sans);fill:var(--ink-3)}
 .s-l{font:700 10px var(--sans);fill:var(--ink-3);letter-spacing:1.1px;text-transform:uppercase}
 .s-a{font:700 11px var(--sans);fill:var(--accent);letter-spacing:.6px}
+.s-b{font:700 13px var(--sans);fill:var(--ink)}
 .box{fill:var(--surface-2);stroke:var(--line-2)}
 .box-a{fill:var(--accent-soft);stroke:var(--accent)}
 .box-t{fill:var(--teal-soft);stroke:var(--teal)}
+.box-p{fill:var(--surface);stroke:var(--line-2)}
 .flow{stroke:var(--line-2);stroke-width:1.6;fill:none}
 .flow-a{stroke:var(--accent);stroke-width:2;fill:none}
+.veto{stroke:var(--accent);stroke-width:2.4;fill:none;stroke-dasharray:5 4}
 
 .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:28px 28px 24px}
@@ -125,12 +129,76 @@ section{padding:66px 0;scroll-margin-top:90px}
 .pos p{font-size:14px;color:var(--ink-2);line-height:1.68}
 
 .ledger{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-.ledger .row{display:grid;grid-template-columns:180px 1fr;gap:22px;padding:20px 26px;
+.ledger .row{display:grid;grid-template-columns:190px 1fr;gap:22px;padding:20px 26px;
   border-bottom:1px solid var(--line)}
 .ledger .row:last-child{border-bottom:none}
 .ledger .k{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-3);font-weight:700;padding-top:2px}
 .ledger .v{font-size:14.8px;color:var(--ink-2);line-height:1.7}
 .ledger .v b{color:var(--ink);font-weight:600}
+
+/* ---------- arc / timeline ---------- */
+.arc{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.arc div{background:var(--surface);padding:26px 26px 24px;position:relative}
+.arc .when{font-family:var(--display);font-size:15px;color:var(--accent);font-weight:600;
+  letter-spacing:-.2px}
+.arc h3{font-size:15.5px;font-weight:700;margin:9px 0 9px}
+.arc p{font-size:14px;color:var(--ink-2);line-height:1.68}
+.arc div::before{content:"";position:absolute;left:26px;top:0;height:3px;width:30px;background:var(--accent)}
+
+/* ---------- OS mapping table ---------- */
+.osmap{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r);overflow:hidden}
+.osmap th{text-align:left;font-size:11px;letter-spacing:1.1px;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;padding:16px 22px;border-bottom:1px solid var(--line);
+  background:var(--surface-2)}
+.osmap td{padding:17px 22px;border-bottom:1px solid var(--line);font-size:14.6px;
+  color:var(--ink-2);line-height:1.6;vertical-align:top}
+.osmap tr:last-child td{border-bottom:none}
+.osmap td:first-child{font-weight:700;color:var(--ink-3);font-size:12px;letter-spacing:1px;
+  text-transform:uppercase;white-space:nowrap;padding-top:20px}
+.osmap td:nth-child(2){color:var(--ink);font-weight:600;white-space:nowrap}
+.osmap code{font-family:var(--mono);font-size:13px;color:var(--accent);background:var(--accent-soft);
+  padding:2px 7px;border-radius:5px}
+.tablewrap{overflow-x:auto;border-radius:var(--r)}
+
+/* ---------- projects ---------- */
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.proj{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:28px 26px 24px;display:flex;flex-direction:column}
+.proj .pill{display:inline-flex;align-self:flex-start;font-size:10.5px;font-weight:700;
+  letter-spacing:.9px;text-transform:uppercase;padding:4px 11px;border-radius:999px;margin-bottom:14px}
+.pill.live{color:var(--accent);background:var(--accent-soft);border:1px solid var(--accent)}
+.pill.soon{color:var(--ink-3);background:var(--surface-2);border:1px dashed var(--line-2)}
+.proj h3{font-family:var(--display);font-weight:600;font-size:19.5px;letter-spacing:-.25px;margin-bottom:11px}
+.proj p{font-size:14.3px;color:var(--ink-2);line-height:1.68;flex:1}
+.proj p+p{margin-top:9px}
+.proj b{color:var(--ink);font-weight:600}
+.proj .stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.proj .stack span{font-size:10.5px;color:var(--ink-3);border:1px solid var(--line);
+  padding:3px 9px;border-radius:999px;background:var(--surface-2)}
+
+.roadmap{margin-top:20px;background:var(--surface-2);border:1px dashed var(--line-2);
+  border-radius:var(--r);padding:24px 26px}
+.roadmap .tagline{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;margin-bottom:10px}
+.roadmap p{font-size:14.5px;color:var(--ink-2);line-height:1.7}
+.roadmap b{color:var(--ink);font-weight:600}
+
+/* ---------- closer ---------- */
+.closer{margin-top:22px;background:var(--surface);border:1px solid var(--accent);
+  border-radius:var(--r);padding:34px 36px 30px;box-shadow:var(--shadow)}
+.closer h3{font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:-.3px;
+  margin-bottom:12px}
+.closer p{font-size:15.5px;color:var(--ink-2);line-height:1.72;max-width:74ch}
+.closer-actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:22px}
+.btn{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:600;
+  padding:11px 19px;border-radius:11px;text-decoration:none;border:1px solid var(--line);
+  background:var(--surface);color:var(--ink);transition:border-color .15s,transform .15s}
+.btn:hover{border-color:var(--accent);transform:translateY(-2px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.primary{color:#1a1206}}
+:root[data-theme="dark"] .btn.primary{color:#1a1206}
 
 .back{border-top:1px solid var(--line);padding:56px 0 44px;text-align:center}
 .back a{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:600;
@@ -142,8 +210,8 @@ footer{padding:30px 0;font-size:12.5px;color:var(--ink-3);display:flex;
 footer a{color:var(--ink-3);text-decoration:none}
 footer a:hover{color:var(--accent)}
 
-@media (max-width:960px){.two,.grid3{grid-template-columns:1fr}.sec-head p{margin-left:0}
-  .ledger .row{grid-template-columns:1fr;gap:6px}}
+@media (max-width:960px){.two,.grid3,.arc,.projects{grid-template-columns:1fr}
+  .sec-head p{margin-left:0}.ledger .row{grid-template-columns:1fr;gap:6px}}
 @media (max-width:700px){.shell{padding:0 20px}.top nav{display:none}section{padding:48px 0}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -152,12 +220,12 @@ footer a:hover{color:var(--accent)}
 
 <header class="top">
   <div class="shell">
-    <a class="wordmark" href="v2.html"><b>Adrian Skorupka</b><span>Master Data &amp; BI</span></a>
+    <a class="wordmark" href="index.html"><b>Adrian Skorupka</b><span>Master Data &amp; BI</span></a>
     <nav>
-      <a href="v2.html">Portfolio</a>
+      <a href="index.html">Portfolio</a>
       <a href="ai-system.html" aria-current="page">Multi-agent system</a>
-      <a href="v2.html#reports">Reports</a>
-      <a href="v2.html#contact">Contact</a>
+      <a href="index.html#reports">Reports</a>
+      <a href="index.html#contact">Contact</a>
     </nav>
     <button class="iconbtn" id="theme" aria-label="Switch between light and dark">
       <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
@@ -170,13 +238,15 @@ footer a:hover{color:var(--accent)}
 
 <div class="hero">
   <div class="shell">
-    <div class="eyebrow">Ongoing personal engineering project</div>
-    <h1>A <em>multi-agent AI system</em> that runs a business blueprint end to end.</h1>
-    <p class="lead">Not a chatbot and not a demo. A supervised system of specialised agents that takes
-      a plan, executes it — research, build, publish, measure — and comes back with results, while I
-      supply the intent and hold the approval gates. This page is the concept, the goal, and an
-      honest account of what it has actually solved so far.</p>
-    <div class="status"><i></i> Status: running in private, in active development — not a shipped product</div>
+    <div class="eyebrow">Built continuously since April 2026 · solo technical founder</div>
+    <h1>A <em>multi-agent AI system</em> built as an operating system, not a wrapper.</h1>
+    <p class="lead">It started as an experiment in asynchronous agent debate. It is now a runtime
+      that carries business processes end to end: an <b>Athenian</b> debate layer for deciding what
+      is worth doing, a <b>Roman</b> hierarchy for getting it done, a compiled knowledge base that
+      keeps context from drifting, and a portfolio of live projects sharing one orchestration bus.
+      My role in it is deliberately narrow — strategic orchestrator, and the human on the
+      high-stakes approvals.</p>
+    <div class="status"><i></i> Mature runtime, privately operated · individual projects at different stages, marked below</div>
   </div>
 </div>
 
@@ -212,56 +282,114 @@ footer a:hover{color:var(--accent)}
   </div>
 </section>
 
-<section id="concept">
+<section id="arc">
   <div class="shell">
     <div class="sec-head">
       <span class="sec-num">02</span>
-      <h2>The concept</h2>
-      <p>Five layers. The interesting ones are the rails down the side, not the agents.</p>
+      <h2>From experiment to runtime</h2>
+      <p>Continuity is the point. The compounding only works if you do not restart.</p>
+    </div>
+    <div class="arc">
+      <div>
+        <div class="when">April 2026</div>
+        <h3>An experiment in agent debate</h3>
+        <p>The starting question was narrow: can several agents argue asynchronously and reach a
+          better answer than one agent asked politely? That experiment became the meta-debate layer
+          and set the direction for everything after it.</p>
+      </div>
+      <div>
+        <div class="when">Through spring</div>
+        <h3>Structure before capability</h3>
+        <p>Rather than adding agents, the effort went into the parts that make agents survivable:
+          an execution engine, a supervisor, a typed knowledge base, documentation treated as
+          operational memory rather than as prose.</p>
+      </div>
+      <div>
+        <div class="when">July 2026 →</div>
+        <h3>A stable runtime carrying real work</h3>
+        <p>The system now runs complex processes without supervision between checkpoints, and
+          spawns new business lines onto the same bus. It is privately operated, not a commercial
+          product — the distinction matters and I keep it.</p>
+      </div>
+    </div>
+    <div class="roadmap" style="margin-top:22px">
+      <div class="tagline">Why the continuity matters</div>
+      <p>Sustained development is what kept this out of the <b>AI-wrapper trap</b> — a thin layer
+        over a model that has to be rebuilt every time the model changes. What accumulates instead
+        is <b>structural knowledge</b>: compiled operating history, standards the system enforces on
+        itself, and conventions that new agents inherit rather than relearn. That is not available
+        to something assembled for a single demo.</p>
+    </div>
+  </div>
+</section>
+
+<section id="concept">
+  <div class="shell">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2>The architecture — an LLM OS</h2>
+      <p>Framed after Andrej Karpathy's LLM OS: the model is the processor, and everything
+        interesting is resource management around it.</p>
+    </div>
+
+    <div class="tablewrap" style="margin-bottom:22px">
+      <table class="osmap">
+        <thead><tr><th>Operating system</th><th>In this system</th><th>What it is actually doing</th></tr></thead>
+        <tbody>
+          <tr><td>CPU</td><td>Cognitive core</td>
+            <td>The reasoning units — Claude (Opus and Sonnet), DeepSeek, and local models — selected
+              per role rather than one model for everything.</td></tr>
+          <tr><td>RAM</td><td>Context window</td>
+            <td>Treated as the scarce resource it is. Context engineering decides what an agent is
+              allowed to see, because attention is finite and expensive.</td></tr>
+          <tr><td>File system</td><td>Compiled Wiki</td>
+            <td><code>knowledge_base.jsonl</code> — structured, deduplicated operating knowledge, not
+              a pile of prose.</td></tr>
+          <tr><td>Kernel</td><td>Execution engine</td>
+            <td><code>execution_engine.py</code> walks the workflow graph and executes its steps.
+              Deterministic where the steps are known.</td></tr>
+          <tr><td>Daemon</td><td>Supervisor</td>
+            <td><code>supervisor_agent.py</code> runs alongside, watches for drift, and escalates to
+              me when something leaves its expected envelope.</td></tr>
+        </tbody>
+      </table>
     </div>
 
     <figure class="fig">
       <svg viewBox="0 0 980 470" role="img" aria-label="Architecture: human intent at the top, orchestrator, execution layer of n8n workflows and Python agents, a model router, and a single-writer state store at the base, with cost governance, an LLM-as-judge and human approval gates running alongside.">
-        <!-- rails -->
         <rect x="770" y="70" width="196" height="330" rx="12" class="box" opacity=".55"/>
         <text x="868" y="94" class="s-l" text-anchor="middle">Control rails</text>
 
-        <!-- human -->
         <rect x="14" y="16" width="740" height="52" rx="10" class="box-a"/>
-        <text x="34" y="40" class="s-t">Human intent</text>
+        <text x="34" y="40" class="s-t">Human intent — the orchestrator</text>
         <text x="34" y="56" class="s-s">I choose what is worth doing, and I sign off on anything irreversible</text>
         <circle cx="726" cy="42" r="13" class="box-a"/>
         <text x="726" y="46" class="s-a" text-anchor="middle">AS</text>
 
-        <!-- orchestrator -->
         <rect x="14" y="98" width="740" height="60" rx="10" class="box-t"/>
         <text x="34" y="122" class="s-t">Orchestrator — explicit state machine</text>
         <text x="34" y="140" class="s-s">LangGraph. Every run has named states and legal transitions. No free-running loops.</text>
 
-        <!-- execution -->
         <text x="14" y="184" class="s-l">Execution layer</text>
         <rect x="14" y="194" width="360" height="76" rx="10" class="box"/>
         <text x="34" y="218" class="s-t">n8n — bought, not built</text>
-        <text x="34" y="236" class="s-s">Self-hosted workflow engine for the</text>
+        <text x="34" y="236" class="s-s">Self-hosted orchestration bus for the</text>
         <text x="34" y="252" class="s-s">commodity plumbing: schedules, retries, I/O</text>
         <rect x="394" y="194" width="360" height="76" rx="10" class="box"/>
         <text x="414" y="218" class="s-t">Python agents — built</text>
         <text x="414" y="236" class="s-s">Only where the actual intellectual</text>
         <text x="414" y="252" class="s-s">property lives: domain logic, judgement</text>
 
-        <!-- model router -->
         <rect x="14" y="292" width="740" height="66" rx="10" class="box"/>
         <text x="34" y="316" class="s-t">Model router — capability per task, not one model for everything</text>
-        <text x="34" y="336" class="s-s">local Ollama · DeepSeek · OpenAI · Claude &nbsp;—&nbsp; chosen by configuration per role, never hard-coded</text>
+        <text x="34" y="336" class="s-s">local models · DeepSeek · Claude Opus / Sonnet &nbsp;—&nbsp; chosen by configuration per role, never hard-coded</text>
         <text x="34" y="352" class="s-s">Cheap and local by default; a frontier model only where it measurably changes the outcome</text>
 
-        <!-- state -->
         <rect x="14" y="380" width="740" height="64" rx="10" class="box-t"/>
-        <text x="34" y="404" class="s-t">Single-writer state &amp; knowledge base</text>
+        <text x="34" y="404" class="s-t">Single-writer state &amp; Compiled Wiki</text>
         <text x="34" y="424" class="s-s">Exactly one component may write a given record — two agents can never race the same row.</text>
         <text x="34" y="440" class="s-s">The master-data instinct, applied to agents.</text>
 
-        <!-- rail items -->
         <rect x="784" y="108" width="168" height="82" rx="9" class="box-a"/>
         <text x="800" y="132" class="s-t">Cost governance</text>
         <text x="800" y="150" class="s-s">Spend tracked per model</text>
@@ -280,7 +408,6 @@ footer a:hover{color:var(--accent)}
         <text x="800" y="362" class="s-s">facing actions stop here</text>
         <text x="800" y="378" class="s-s">and wait for approval.</text>
 
-        <!-- flows -->
         <path class="flow-a" d="M384 68 L384 98" marker-end="url(#ar)"/>
         <path class="flow" d="M384 158 L384 194" marker-end="url(#ar)"/>
         <path class="flow" d="M194 270 L194 292" marker-end="url(#ar)"/>
@@ -302,10 +429,104 @@ footer a:hover{color:var(--accent)}
   </div>
 </section>
 
+<section id="models">
+  <div class="shell">
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <h2>Two orchestration models: Athens and Rome</h2>
+      <p>Different problems want different governments. Planning wants argument; execution wants a
+        chain of command.</p>
+    </div>
+
+    <figure class="fig">
+      <svg viewBox="0 0 980 430" role="img" aria-label="Left: the Athenian model, a three by three Latin square where three agents rotate through the roles of Strategist, Critic and Creator across three rounds. Right: the Roman model, a Consul supervising three specialist agents, with a Tribune holding a veto over brand safety and budget.">
+        <!-- ============ ATHENS ============ -->
+        <text x="14" y="20" class="s-l">Model I · Athens — the brain</text>
+        <text x="14" y="40" class="s-s">Meta-debate. Swarm intelligence over a 3&times;3 Latin square.</text>
+
+        <rect x="14" y="58" width="452" height="300" rx="12" class="box-t" opacity=".45"/>
+
+        <!-- column headers -->
+        <text x="150" y="88" class="s-l" text-anchor="middle">Agent A</text>
+        <text x="262" y="88" class="s-l" text-anchor="middle">Agent B</text>
+        <text x="374" y="88" class="s-l" text-anchor="middle">Agent C</text>
+
+        <!-- rows -->
+        <text x="60" y="126" class="s-l" text-anchor="middle">Round 1</text>
+        <rect x="102" y="104" width="96" height="34" rx="7" class="box-a"/><text x="150" y="126" class="s-a" text-anchor="middle">STRATEGIST</text>
+        <rect x="214" y="104" width="96" height="34" rx="7" class="box-p"/><text x="262" y="126" class="s-s" text-anchor="middle">CRITIC</text>
+        <rect x="326" y="104" width="96" height="34" rx="7" class="box-p"/><text x="374" y="126" class="s-s" text-anchor="middle">CREATOR</text>
+
+        <text x="60" y="176" class="s-l" text-anchor="middle">Round 2</text>
+        <rect x="102" y="154" width="96" height="34" rx="7" class="box-p"/><text x="150" y="176" class="s-s" text-anchor="middle">CREATOR</text>
+        <rect x="214" y="154" width="96" height="34" rx="7" class="box-a"/><text x="262" y="176" class="s-a" text-anchor="middle">STRATEGIST</text>
+        <rect x="326" y="154" width="96" height="34" rx="7" class="box-p"/><text x="374" y="176" class="s-s" text-anchor="middle">CRITIC</text>
+
+        <text x="60" y="226" class="s-l" text-anchor="middle">Round 3</text>
+        <rect x="102" y="204" width="96" height="34" rx="7" class="box-p"/><text x="150" y="226" class="s-s" text-anchor="middle">CRITIC</text>
+        <rect x="214" y="204" width="96" height="34" rx="7" class="box-p"/><text x="262" y="226" class="s-s" text-anchor="middle">CREATOR</text>
+        <rect x="326" y="204" width="96" height="34" rx="7" class="box-a"/><text x="374" y="226" class="s-a" text-anchor="middle">STRATEGIST</text>
+
+        <rect x="40" y="258" width="400" height="80" rx="9" class="box-p"/>
+        <text x="60" y="282" class="s-t">Why rotate the roles</text>
+        <text x="60" y="300" class="s-s">Every agent must argue every side once. No single voice owns the</text>
+        <text x="60" y="316" class="s-s">plan, and agreement has to be earned against a critic — which is what</text>
+        <text x="60" y="332" class="s-s">stops hallucination-by-consensus, the failure mode of agreeable swarms.</text>
+
+        <!-- ============ ROME ============ -->
+        <text x="514" y="20" class="s-l">Model II · Rome — the hands</text>
+        <text x="514" y="40" class="s-s">Execution. Hierarchy, specialisation, and a veto.</text>
+
+        <rect x="514" y="58" width="452" height="300" rx="12" class="box" opacity=".45"/>
+
+        <rect x="612" y="86" width="180" height="46" rx="9" class="box-a"/>
+        <text x="702" y="106" class="s-b" text-anchor="middle">CONSUL</text>
+        <text x="702" y="122" class="s-s" text-anchor="middle">supervisor — owns the outcome</text>
+
+        <rect x="540" y="182" width="122" height="52" rx="8" class="box-p"/>
+        <text x="601" y="204" class="s-t" text-anchor="middle">Agent</text>
+        <text x="601" y="220" class="s-s" text-anchor="middle">research</text>
+
+        <rect x="674" y="182" width="122" height="52" rx="8" class="box-p"/>
+        <text x="735" y="204" class="s-t" text-anchor="middle">Agent</text>
+        <text x="735" y="220" class="s-s" text-anchor="middle">build</text>
+
+        <rect x="808" y="182" width="122" height="52" rx="8" class="box-p"/>
+        <text x="869" y="204" class="s-t" text-anchor="middle">Agent</text>
+        <text x="869" y="220" class="s-s" text-anchor="middle">publish</text>
+
+        <path class="flow" d="M702 132 L702 156" />
+        <path class="flow" d="M601 156 L869 156" />
+        <path class="flow" d="M601 156 L601 182" marker-end="url(#ar2)"/>
+        <path class="flow" d="M735 156 L735 182" marker-end="url(#ar2)"/>
+        <path class="flow" d="M869 156 L869 182" marker-end="url(#ar2)"/>
+
+        <rect x="540" y="262" width="390" height="76" rx="9" class="box-a"/>
+        <text x="560" y="286" class="s-b">TRIBUNE — the veto</text>
+        <text x="560" y="304" class="s-s">Blocks any action that breaches brand safety or exceeds the</text>
+        <text x="560" y="320" class="s-s">compute budget. It cannot start work; it can only stop it.</text>
+        <path class="veto" d="M735 234 L735 262" marker-end="url(#ar3)"/>
+        <defs>
+          <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--line-2)"/>
+          </marker>
+          <marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/>
+          </marker>
+        </defs>
+      </svg>
+      <figcaption><b>Why both.</b> An Athenian brain alone deliberates forever; Roman hands alone
+        execute a bad plan efficiently. Splitting them removes decision paralysis without giving up
+        determinism — argument where the answer is unknown, chain of command once it is settled. The
+        Tribune is deliberately asymmetric: it has no power to start anything, only to stop it.</figcaption>
+    </figure>
+  </div>
+</section>
+
 <section id="goal">
   <div class="shell">
     <div class="sec-head">
-      <span class="sec-num">03</span>
+      <span class="sec-num">05</span>
       <h2>The goal — a loop that closes</h2>
       <p>The design target, and the failure mode it is deliberately built against.</p>
     </div>
@@ -313,8 +534,6 @@ footer a:hover{color:var(--accent)}
     <figure class="fig">
       <svg viewBox="0 0 980 340" role="img" aria-label="A closed loop: intent, plan, execute, measure, learn, feeding back into plan. The human touches only intent and the approval gate; everything else runs unattended.">
         <text x="14" y="22" class="s-l">The loop</text>
-
-        <!-- nodes -->
         <g>
           <rect x="14" y="118" width="150" height="66" rx="10" class="box-a"/>
           <text x="89" y="146" class="s-t" text-anchor="middle">1 · Intent</text>
@@ -323,12 +542,12 @@ footer a:hover{color:var(--accent)}
         <g>
           <rect x="208" y="118" width="150" height="66" rx="10" class="box"/>
           <text x="283" y="146" class="s-t" text-anchor="middle">2 · Plan</text>
-          <text x="283" y="165" class="s-s" text-anchor="middle">blueprint, decomposed</text>
+          <text x="283" y="165" class="s-s" text-anchor="middle">Athens deliberates</text>
         </g>
         <g>
           <rect x="402" y="118" width="150" height="66" rx="10" class="box"/>
           <text x="477" y="146" class="s-t" text-anchor="middle">3 · Execute</text>
-          <text x="477" y="165" class="s-s" text-anchor="middle">research · build · publish</text>
+          <text x="477" y="165" class="s-s" text-anchor="middle">Rome delivers</text>
         </g>
         <g>
           <rect x="596" y="118" width="150" height="66" rx="10" class="box"/>
@@ -338,33 +557,30 @@ footer a:hover{color:var(--accent)}
         <g>
           <rect x="790" y="118" width="150" height="66" rx="10" class="box-t"/>
           <text x="865" y="146" class="s-t" text-anchor="middle">5 · Learn</text>
-          <text x="865" y="165" class="s-s" text-anchor="middle">write back, adjust</text>
+          <text x="865" y="165" class="s-s" text-anchor="middle">compiled back to the wiki</text>
         </g>
 
-        <!-- forward arrows -->
-        <path class="flow" d="M164 151 L208 151" marker-end="url(#ar2)"/>
-        <path class="flow" d="M358 151 L402 151" marker-end="url(#ar2)"/>
-        <path class="flow" d="M552 151 L596 151" marker-end="url(#ar2)"/>
-        <path class="flow" d="M746 151 L790 151" marker-end="url(#ar2)"/>
-        <!-- feedback -->
-        <path class="flow-a" d="M865 184 L865 250 Q865 262 853 262 L295 262 Q283 262 283 250 L283 184" marker-end="url(#ar3)"/>
+        <path class="flow" d="M164 151 L208 151" marker-end="url(#ar4)"/>
+        <path class="flow" d="M358 151 L402 151" marker-end="url(#ar4)"/>
+        <path class="flow" d="M552 151 L596 151" marker-end="url(#ar4)"/>
+        <path class="flow" d="M746 151 L790 151" marker-end="url(#ar4)"/>
+        <path class="flow-a" d="M865 184 L865 250 Q865 262 853 262 L295 262 Q283 262 283 250 L283 184" marker-end="url(#ar5)"/>
         <text x="574" y="282" class="s-a" text-anchor="middle">the loop closes here — without a human in the middle</text>
 
-        <!-- human touchpoints -->
-        <path class="flow-a" d="M89 118 L89 84" marker-end="url(#ar3)"/>
+        <path class="flow-a" d="M89 118 L89 84" marker-end="url(#ar5)"/>
         <rect x="14" y="46" width="150" height="34" rx="8" class="box-a"/>
         <text x="89" y="68" class="s-a" text-anchor="middle">HUMAN · stimulus</text>
 
-        <path class="flow-a" d="M477 118 L477 84" marker-end="url(#ar3)"/>
+        <path class="flow-a" d="M477 118 L477 84" marker-end="url(#ar5)"/>
         <rect x="392" y="46" width="170" height="34" rx="8" class="box-a"/>
         <text x="477" y="68" class="s-a" text-anchor="middle">HUMAN · approval gate</text>
 
         <text x="966" y="22" class="s-s" text-anchor="end">two touchpoints, by design</text>
         <defs>
-          <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <marker id="ar4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
             <path d="M0 0 L10 5 L0 10 z" fill="var(--line-2)"/>
           </marker>
-          <marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <marker id="ar5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
             <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/>
           </marker>
         </defs>
@@ -377,10 +593,131 @@ footer a:hover{color:var(--accent)}
   </div>
 </section>
 
+<section id="knowledge">
+  <div class="shell">
+    <div class="sec-head">
+      <span class="sec-num">06</span>
+      <h2>Knowledge as infrastructure</h2>
+      <p>Clean data is code for models. This is the part of the system closest to my day job.</p>
+    </div>
+
+    <figure class="fig">
+      <svg viewBox="0 0 980 400" role="img" aria-label="Left: five context layers from routing and onboarding through operational knowledge and Factory templates to session products. Right: the Compiled Wiki in three layers - immutable raw sources that agents may only read, the compiled knowledge base written by one model, and a schema enforcing record types.">
+        <!-- context layers -->
+        <text x="14" y="20" class="s-l">Context layers — what an agent is allowed to load</text>
+        <rect x="14" y="36" width="452" height="330" rx="12" class="box" opacity=".4"/>
+
+        <rect x="38" y="58" width="404" height="50" rx="8" class="box-a"/>
+        <text x="58" y="80" class="s-t">L0–L1 · Routing &amp; onboarding</text>
+        <text x="58" y="98" class="s-s">Entry files and routers. Owned by me — agents never write here.</text>
+
+        <rect x="38" y="122" width="404" height="50" rx="8" class="box-p"/>
+        <text x="58" y="144" class="s-t">L2–L3 · Operational knowledge &amp; Factory</text>
+        <text x="58" y="162" class="s-s">SOPs, guidelines, templates — the moulds, not the castings.</text>
+
+        <rect x="38" y="186" width="404" height="50" rx="8" class="box-p"/>
+        <text x="58" y="208" class="s-t">L4 · Product</text>
+        <text x="58" y="226" class="s-s">Session artefacts and deliverables — the castings.</text>
+
+        <rect x="38" y="256" width="404" height="92" rx="9" class="box-t"/>
+        <text x="58" y="280" class="s-t">Factory and Product are strictly separated</text>
+        <text x="58" y="300" class="s-s">A template can never be edited by the run that consumes it, and an</text>
+        <text x="58" y="316" class="s-s">artefact can never quietly become the standard. The folder structure</text>
+        <text x="58" y="332" class="s-s">is the agent architecture — directory layout carries meaning.</text>
+
+        <!-- compiled wiki -->
+        <text x="514" y="20" class="s-l">Compiled Wiki — three layers, one writer each</text>
+        <rect x="514" y="36" width="452" height="330" rx="12" class="box" opacity=".4"/>
+
+        <rect x="538" y="58" width="404" height="72" rx="8" class="box-p"/>
+        <text x="558" y="82" class="s-t">Layer 1 · RAW</text>
+        <text x="558" y="100" class="s-s">Immutable sources of truth: blueprints, logs, decisions.</text>
+        <text x="558" y="118" class="s-a">agents: read-only</text>
+
+        <rect x="538" y="144" width="404" height="82" rx="8" class="box-a"/>
+        <text x="558" y="168" class="s-t">Layer 2 · Compiled knowledge base</text>
+        <text x="558" y="186" class="s-s">Runtime knowledge, ingested and deduplicated automatically.</text>
+        <text x="558" y="204" class="s-a">single writer: one dedicated local model</text>
+        <text x="558" y="220" class="s-s">Strategic documentation stays mine — the boundary is enforced, not assumed.</text>
+
+        <rect x="538" y="240" width="404" height="66" rx="8" class="box-t"/>
+        <text x="558" y="264" class="s-t">Layer 3 · Schema</text>
+        <text x="558" y="282" class="s-s">Record typing rules. Nothing enters the base without a shape,</text>
+        <text x="558" y="298" class="s-s">which is what keeps the whole store queryable months later.</text>
+
+        <rect x="538" y="320" width="404" height="30" rx="7" class="box-p"/>
+        <text x="558" y="340" class="s-s">Librarian agent enforces: one home per fact · token discipline · no orphan nodes</text>
+      </svg>
+      <figcaption><b>This is master data management wearing different clothes.</b> One home per
+        fact, a schema that rejects malformed records, a named owner for every layer, and a strict
+        line between the template and the thing produced from it. Treating documentation as the
+        model's operating memory — rather than as writing — is what stops context drift over long
+        sessions: the system does not forget the standards it agreed to, so a new agent is
+        productive in seconds rather than hours.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="shell">
+    <div class="sec-head">
+      <span class="sec-num">07</span>
+      <h2>What actually runs on it</h2>
+      <p>Three live projects on one orchestration bus, deliberately unalike — the range is the
+        proof that the architecture generalises.</p>
+    </div>
+    <div class="projects">
+
+      <div class="proj">
+        <span class="pill live">Functionally complete</span>
+        <h3>The Abyss</h3>
+        <p>A dark-fiction RPG, deployed on Cloudflare Pages and Workers with
+          <b>server-authoritative billing</b> — the client is never trusted with anything that costs
+          money.</p>
+        <p>Architecturally it is the interesting one: it runs as a <b>sovereign agent entity</b>
+          outside the main execution process. A company that happens to be an agent, rather than a
+          feature of the platform.</p>
+        <div class="stack"><span>Cloudflare Pages</span><span>Workers</span><span>Server-authoritative billing</span><span>Narrative engine</span></div>
+      </div>
+
+      <div class="proj">
+        <span class="pill live">Producing real assets</span>
+        <h3>UGC Performance Engine</h3>
+        <p>A white-label marketing system built on full grounding — it produces <b>real video
+          assets</b> rather than mock-ups, from a stack of stock footage, synthetic voice and FFmpeg
+          composition.</p>
+        <p>Every output carries a verifiable <b>C2PA provenance signature</b>, which is how you stay
+          on the right side of the EU AI Act instead of hoping nobody asks.</p>
+        <div class="stack"><span>Pexels</span><span>ElevenLabs</span><span>FFmpeg</span><span>C2PA</span><span>EU AI Act</span></div>
+      </div>
+
+      <div class="proj">
+        <span class="pill live">Stable pipeline</span>
+        <h3>AI News</h3>
+        <p>An aggregation and analysis pipeline that turns market signal into short strategic
+          briefings.</p>
+        <p>The value is in what it removes: the point of the filter is a briefing worth reading, not
+          a longer digest. Signal, not volume.</p>
+        <div class="stack"><span>Ingestion</span><span>Signal filtering</span><span>Briefing generation</span></div>
+      </div>
+
+    </div>
+
+    <div class="roadmap">
+      <div class="tagline">On the roadmap — not built yet, and labelled as such</div>
+      <p>An <b>autonomous knowledge bridge</b>, a <b>product-led growth network</b>, and a
+        <b>content distribution engine</b> — all planned on foundations the three projects above
+        have already exercised. Because they share one finance engine and one bus, a new line costs
+        marginal effort rather than a new platform: <b>spawning a business line does not multiply
+        operating cost linearly</b>. That is the actual argument for building the plumbing first.</p>
+    </div>
+  </div>
+</section>
+
 <section id="positions">
   <div class="shell">
     <div class="sec-head">
-      <span class="sec-num">04</span>
+      <span class="sec-num">08</span>
       <h2>Six positions I would defend in a review</h2>
       <p>These are the decisions that cost the most to get wrong, so they were made explicitly.</p>
     </div>
@@ -409,20 +746,21 @@ footer a:hover{color:var(--accent)}
       <div class="pos">
         <div class="n">04</div>
         <h3>Buy the commodity, build the core</h3>
-        <p>The execution layer is self-hosted n8n because a proven engine beats a bespoke one, and
+        <p>The orchestration bus is self-hosted n8n because a proven engine beats a bespoke one, and
           my time is better spent on the parts nobody sells. Custom code only where the actual
           intellectual property lives.</p>
       </div>
       <div class="pos">
         <div class="n">05</div>
-        <h3>A human on the high-stakes call</h3>
-        <p>Approval gates before anything irreversible or outward-facing — money, public
-          publication, commitments. Below that line, the judge layer handles quality without me.</p>
+        <h3>Minimum viable context</h3>
+        <p>Agents are served the smallest relevant slice of data rather than everything available.
+          It cuts token spend sharply and, less obviously, improves precision — a model given less
+          irrelevant material makes fewer irrelevant decisions.</p>
       </div>
       <div class="pos">
         <div class="n">06</div>
         <h3>Honest about what is not done</h3>
-        <p>It runs in private and is in active development. Some loops close cleanly; others still
+        <p>It runs privately and is in active development. Some loops close cleanly; others still
           hand work back to me, and those are the open items. I would rather show the seam than
           claim a finished product.</p>
       </div>
@@ -433,27 +771,39 @@ footer a:hover{color:var(--accent)}
 <section id="solved">
   <div class="shell">
     <div class="sec-head">
-      <span class="sec-num">05</span>
+      <span class="sec-num">09</span>
       <h2>What it has actually solved</h2>
       <p>Concrete outcomes, separated from intentions.</p>
     </div>
     <div class="ledger">
       <div class="row">
         <div class="k">Unpredictable cost</div>
-        <div class="v">Spend is now <b>metered per model call against an enforced budget</b>, with model
+        <div class="v">Spend is <b>metered per model call against an enforced budget</b>, with model
           selection as per-role configuration. Local and cheap models carry the routine load; the
           expensive ones are reserved for work that demonstrably needs them.</div>
       </div>
       <div class="row">
+        <div class="k">Hallucination by consensus</div>
+        <div class="v">The <b>rotating-role debate</b> means no agent ever argues only its own side, and
+          agreement has to survive a designated critic. Diversity of perspective is structural
+          rather than hoped for.</div>
+      </div>
+      <div class="row">
         <div class="k">Silent bad output</div>
         <div class="v">An <b>LLM-as-judge evaluation layer</b> grades output before it moves downstream,
-          so quality control does not depend on me reading everything.</div>
+          and the <b>Tribune veto</b> blocks anything breaching brand safety or budget outright.</div>
       </div>
       <div class="row">
         <div class="k">Runaway agents</div>
-        <div class="v">Replacing open-ended loops with <b>LangGraph state machines</b> made runs
-          inspectable: every run has named states, legal transitions, and retry and timeout handling
-          rather than an indefinite retry.</div>
+        <div class="v">Replacing open-ended loops with <b>explicit state machines</b> made runs
+          inspectable: named states, legal transitions, and retry and timeout handling rather than
+          an indefinite retry. A supervisor daemon watches for drift and escalates.</div>
+      </div>
+      <div class="row">
+        <div class="k">Context drift</div>
+        <div class="v">A <b>compiled, deduplicated knowledge base</b> under a schema means the system does
+          not forget standards it already agreed to, and a new agent can be brought into a project
+          in seconds rather than hours.</div>
       </div>
       <div class="row">
         <div class="k">Conflicting writes</div>
@@ -461,10 +811,9 @@ footer a:hover{color:var(--accent)}
           agents update the same record and the last one silently wins.</div>
       </div>
       <div class="row">
-        <div class="k">Work only I could do</div>
-        <div class="v">Browser-automation agents on Playwright handle the tasks that exist only behind
-          a web UI, and the whole thing is deployed on <b>Cloudflare Workers</b> so it runs without my
-          machine being on.</div>
+        <div class="k">Unverifiable AI output</div>
+        <div class="v">Generated media carries <b>C2PA provenance signatures</b>, so the question "was
+          this AI-generated" has a checkable answer rather than a promise.</div>
       </div>
       <div class="row">
         <div class="k">Still open</div>
@@ -479,7 +828,7 @@ footer a:hover{color:var(--accent)}
 <section id="transfer">
   <div class="shell">
     <div class="sec-head">
-      <span class="sec-num">06</span>
+      <span class="sec-num">10</span>
       <h2>Why this belongs on a master data CV</h2>
       <p>The connection is not decorative.</p>
     </div>
@@ -488,10 +837,12 @@ footer a:hover{color:var(--accent)}
         <div class="tagline">Same discipline</div>
         <h3>Governance is governance, whatever is writing the record</h3>
         <p>Deciding who may write a field, validating input before it lands, keeping one version of
-          the truth, and putting a human on the decisions that carry liability — that is master data
-          management. It is also, line for line, what makes an agent system safe to run.</p>
-        <p>The reason I reached for single-writer state and budget enforcement early is that I have
-          spent eight years cleaning up what happens when nobody did.</p>
+          the truth, enforcing a schema, and putting a human on the decisions that carry liability —
+          that is master data management. It is also, line for line, what makes an agent system safe
+          to run.</p>
+        <p>The reason I reached for single-writer state, a typed knowledge base and budget
+          enforcement early is that I have spent eight years cleaning up what happens when nobody
+          did.</p>
       </div>
       <div class="panel good">
         <div class="tagline">What it means for an employer</div>
@@ -503,12 +854,26 @@ footer a:hover{color:var(--accent)}
           I will say so.</p>
       </div>
     </div>
+
+    <div class="closer">
+      <h3>The short version</h3>
+      <p>I have spent eight years making large organisations agree on their data, and the last
+        several months building a system that has to live by those same rules to work at all. One
+        is on my CV; the other is the reason I can talk about AI in a reporting function without
+        either overpromising or dismissing it.</p>
+      <div class="closer-actions">
+        <a class="btn primary" href="mailto:adrian.skorupka@gmail.com">Get in touch</a>
+        <a class="btn" href="cv/adrian-skorupka-cv-manager.pdf">CV — Manager / Lead</a>
+        <a class="btn" href="cv/adrian-skorupka-cv-ic.pdf">CV — Individual contributor</a>
+        <a class="btn" href="index.html">See the rest of the portfolio</a>
+      </div>
+    </div>
   </div>
 </section>
 
 <div class="back">
   <div class="shell">
-    <a href="v2.html">← Back to the portfolio</a>
+    <a href="index.html">← Back to the portfolio</a>
     <footer>
       <span>© 2026 Adrian Skorupka</span>
       <span><a href="mailto:adrian.skorupka@gmail.com">adrian.skorupka@gmail.com</a> ·
