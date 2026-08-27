@@ -337,8 +337,10 @@ footer a:hover{color:var(--accent)}
         <thead><tr><th>Operating system</th><th>In this system</th><th>What it is actually doing</th></tr></thead>
         <tbody>
           <tr><td>CPU</td><td>Cognitive core</td>
-            <td>The reasoning units — Claude (Opus and Sonnet), DeepSeek, and local models — selected
-              per role rather than one model for everything.</td></tr>
+            <td>The reasoning units — Claude (Opus and Sonnet), OpenAI GPT, DeepSeek, and local
+              models served through Ollama (Qwen&nbsp;3, Gemma) — selected per role rather than one
+              model for everything. Local models run on the workstation in development and on a
+              rented GPU in production, behind the same interface, so the swap costs no code.</td></tr>
           <tr><td>RAM</td><td>Context window</td>
             <td>Treated as the scarce resource it is. Context engineering decides what an agent is
               allowed to see, because attention is finite and expensive.</td></tr>
@@ -382,7 +384,7 @@ footer a:hover{color:var(--accent)}
 
         <rect x="14" y="292" width="740" height="66" rx="10" class="box"/>
         <text x="34" y="316" class="s-t">Model router — capability per task, not one model for everything</text>
-        <text x="34" y="336" class="s-s">local models · DeepSeek · Claude Opus / Sonnet &nbsp;—&nbsp; chosen by configuration per role, never hard-coded</text>
+        <text x="34" y="336" class="s-s">Ollama local (Qwen 3 · Gemma) · DeepSeek · OpenAI GPT · Claude Opus / Sonnet &nbsp;—&nbsp; chosen by configuration per role</text>
         <text x="34" y="352" class="s-s">Cheap and local by default; a frontier model only where it measurably changes the outcome</text>
 
         <rect x="14" y="380" width="740" height="64" rx="10" class="box-t"/>
@@ -426,6 +428,20 @@ footer a:hover{color:var(--accent)}
         three boxes on the right are the reason it is safe to let it run. Most of the engineering
         effort went into the rails, not into adding agents.</figcaption>
     </figure>
+
+    <div class="roadmap">
+      <div class="tagline">What the stack is actually made of</div>
+      <p><b>Python</b> throughout, with <b>LangGraph</b> for state-machine orchestration and
+        <b>Pydantic</b> schemas enforcing the shape of every record that crosses a boundary — the
+        typed contract is what makes a knowledge base still queryable months later. Services that
+        need to be callable expose <b>FastAPI</b> endpoints; the orchestration bus is self-hosted
+        <b>n8n</b> in <b>Docker</b>. Agents that have to operate a browser rather than an API drive
+        it through <b>Playwright</b>, and tool access to the models is standardised over <b>MCP</b>
+        instead of a bespoke integration per tool. Deployment for the public-facing projects is
+        <b>Cloudflare</b> Pages and Workers.</p>
+      <p>Nothing here was chosen for novelty. The rule in position 04 below applies to the whole
+        list: buy or adopt the commodity, and write code only where the judgement lives.</p>
+    </div>
   </div>
 </section>
 
@@ -520,6 +536,20 @@ footer a:hover{color:var(--accent)}
         determinism — argument where the answer is unknown, chain of command once it is settled. The
         Tribune is deliberately asymmetric: it has no power to start anything, only to stop it.</figcaption>
     </figure>
+
+    <div class="roadmap">
+      <div class="tagline">Between the two — a simulated market, before anything gets built</div>
+      <p>Argument alone still only proves that a plan survived its critic, not that anyone wants the
+        thing. So a plan that clears the debate does not go straight to Rome. It is first compiled
+        into a structured seed and run through a <b>market simulation</b>: a model is given the
+        proposition and asked to respond as the market would — objections, willingness to pay, the
+        reasons it would be ignored. A second judging pass reads that verdict alongside the original
+        plan, and only then does the blueprint reach my approval gate.</p>
+      <p>The point is <b>ordering</b>. The cheapest place to kill an idea is before it becomes a
+        project, so the sequence is deliberately argue → simulate → judge again → human decides.
+        The simulation runs on a low-cost model against its own budget, precisely because it is
+        meant to be run often and early rather than saved for the ideas already committed to.</p>
+    </div>
   </div>
 </section>
 
