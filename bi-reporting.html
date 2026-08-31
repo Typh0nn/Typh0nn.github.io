@@ -27,7 +27,7 @@
 
   <div class="hero">
     <h1>BI &amp; Reporting</h1>
-    <div class="role">Power BI · DAX · Azure SQL Data Warehouse · Azure Analysis Services · SAP Analytics Cloud</div>
+    <div class="role">Power BI · DAX · MDX · OLAP · Azure SQL Data Warehouse · Azure Analysis Services · SAP Analytics Cloud</div>
     <p class="lead">I design reports that survive contact with real stakeholders — where the measure
       definitions hold across markets, the model refreshes without hand-holding, and an executive can
       read the page in thirty seconds. Below: two delivery case studies, then ten worked dashboard
@@ -46,15 +46,17 @@
           compare them without manual rework, and every market maintained its own Excel chain.</dd>
         <dt>Approach</dt>
         <dd>Two-year programme under HQ Strategic Insights supervision. Built <b>Power BI composite models</b>
-          over a centralised <b>Azure SQL data warehouse</b>, with market data (shipments, distributor,
-          sell-in/sell-out via <b>Azure Analysis Services</b>), consumer insight and financial actuals and
-          planning connected into one semantic layer. Row-level security so each market sees its own scope.</dd>
+          over a centralised <b>Azure SQL data warehouse</b>, with retail audit and market measurement data
+          from <b>NielsenIQ</b> alongside market data (shipments, distributor, sell-in/sell-out served from
+          <b>OLAP cubes</b> in <b>Azure Analysis Services</b>, where I wrote the <b>MDX</b> calculated columns
+          and measures), consumer insight and financial actuals and planning connected into one semantic
+          layer. Row-level security so each market sees its own scope.</dd>
         <dt>Result</dt>
         <dd><b>450+ report views per day</b>, actively used by <b>300+ stakeholders</b> across Western and
           Eastern Europe, the Philippines and Geneva HQ. Local and global reporting from the same
           definitions for the first time.</dd>
       </dl>
-      <div class="stack"><span>Power BI</span><span>Composite models</span><span>DAX</span><span>Row-level security</span><span>Azure SQL DW</span><span>Azure Analysis Services</span><span>SAP Analytics Cloud</span></div>
+      <div class="stack"><span>Power BI</span><span>Composite models</span><span>DAX</span><span>MDX</span><span>OLAP cubes</span><span>Row-level security</span><span>Azure SQL DW</span><span>Azure Analysis Services</span><span>SAP Analytics Cloud</span><span>NielsenIQ data</span></div>
     </article>
 
     <article class="case" style="--track:var(--bi)">
